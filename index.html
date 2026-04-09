@@ -120,6 +120,9 @@ table.rk tr:hover{background:#f0f4ff}
 <div class="sec"><h3 id="secTitle">Performance por Plataforma</h3><p id="secDesc">Comparativo entre players em cada rede social</p></div>
 <div class="chart-grid" id="chartGrid"></div>
 
+<div class="sec"><h3>Comparação de Performance</h3><p>Evolução em relação ao mês anterior por plataforma e geral</p></div>
+<div class="chart-grid" id="comparisonGrid"></div>
+
 <div class="sec"><h3>Rankings dos Players</h3><p>Classifica&#231;&#227;o geral por touchpoints e performance ponderada</p></div>
 <div class="chart-grid">
   <div class="cc full"><h4><span class="dot" style="background:#1e40af"></span>Touchpoints Digitais</h4><div id="rkTable"></div></div>
@@ -255,6 +258,15 @@ var SEO={
 var charts={};
 var curMo='Mar\xE7o';
 
+// Month order for comparison
+var MONTH_ORDER=['Janeiro','Fevereiro','Mar\xE7o'];
+
+function getPrevMonth(month){
+  var idx=MONTH_ORDER.indexOf(month);
+  if(idx<=0) return null;
+  return MONTH_ORDER[idx-1];
+}
+
 function pos(platform,key){
   var mo=SEO[curMo].rp;
   var sorted=[...mo].sort(function(a,b){return b[key]!==undefined?b[key]-a[key]:b.r-a.r;});
@@ -273,6 +285,16 @@ function findRankPerformance(key,platform){
   var sorted=[...items].sort(function(a,b){return b[key]-a[key];});
   var idx=sorted.findIndex(function(x){return x.p==='ORPEC';});
   return{pos:idx+1,total:sorted.length};
+}
+
+// Get all players from current and previous month for a metric
+function getAllPlayersForMetric(moData, prevMoData, metric){
+  var players={};
+  var curArr=moData[metric]||[];
+  var prevArr=prevMoData?prevMoData[metric]:[];
+  curArr.forEach(function(d){players[d.p]=d.v;});
+  prevArr.forEach(function(d){if(players[d.p]===undefined) players[d.p]=null;});
+  return players;
 }
 
 /* ===================== MONTH SELECT ===================== */
@@ -479,9 +501,127 @@ function render(){
   tbl+=makeDt('PageSpeed - Performance','#10b981',so.ps,'Score');
 
   document.getElementById('dataTables').innerHTML = tbl;
+
+  // -- Comparison Charts (vs previous month) --
+  renderComparison();
 }
 
 render();
+
+/* ===================== COMPARISON CHARTS ===================== */
+function renderComparison(){
+  var mo=META[curMo];
+  var so=SEO[curMo];
+  var prevMoName=getPrevMonth(curMo);
+  var prevMo=prevMoName?META[prevMoName]:null;
+  var prevSo=prevMoName?SEO[prevMoName]:null;
+  
+  var grid=document.getElementById('comparisonGrid');
+  
+  // If no previous month, show message
+  if(!prevMo){
+    grid.innerHTML='<div class="cc full" style="text-align:center;padding:40px;color:#6b7280;"><p>Sem dados do mês anterior para comparação.</p></div>';
+    return;
+  }
+  
+  var ml=MONTH_LABELS[curMo]||curMo;
+  var prevMl=MONTH_LABELS[prevMoName]||prevMoName;
+  
+  // Build comparison data for each platform
+  var comparisons=[];
+  
+  // Instagram
+  comparisons.push(buildComparisonData('Instagram',mo.ig,prevMo.ig,'#e1306c'));
+  // Facebook
+  comparisons.push(buildComparisonData('Facebook',mo.fb,prevMo.fb,'#1877f2'));
+  // LinkedIn
+  comparisons.push(buildComparisonData('LinkedIn',mo.li,prevMo.li,'#0a66c2'));
+  // YouTube
+  comparisons.push(buildComparisonData('YouTube',mo.yt,prevMo.yt,'#ff0000'));
+  // SEO
+  comparisons.push(buildComparisonData('SEO',so.seo,prevSo.seo,'#fbbf24'));
+  // GMN
+  if(mo.gmn && prevMo.gmn){
+    comparisons.push(buildComparisonData('Google Meu Negócio',mo.gmn,prevMo.gmn,'#d97706'));
+  }
+  // PageSpeed
+  comparisons.push(buildComparisonData('PageSpeed',so.ps,prevSo.ps,'#10b981'));
+  
+  // Filter out empty comparisons and render
+  var validComparisons=comparisons.filter(function(c){return c.data.length>0;});
+  
+  if(validComparisons.length===0){
+    grid.innerHTML='<div class="cc full" style="text-align:center;padding:40px;color:#6b7280;"><p>Sem dados para comparação neste período.</p></div>';
+    return;
+  }
+  
+  var html='';
+  validComparisons.forEach(function(comp){
+    html+='<div class="cc"><h4><span class="dot" style="background:'+comp.color+'"></span>'+comp.name+' ('+prevMl+' vs '+ml+')</h4><canvas id="cmp_'+comp.id+'"></canvas></div>';
+  });
+  grid.innerHTML=html;
+  
+  // Render charts
+  var gridC='rgba(0,0,0,0.05)';
+  var tickC='#9ca3af';
+  
+  validComparisons.forEach(function(comp){
+    var elId='cmp_'+comp.id;
+    var c=document.getElementById(elId);
+    if(!c) return;
+    if(charts[elId]) charts[elId].destroy();
+    
+    var labels=comp.data.map(function(d){return d.player;});
+    var curData=comp.data.map(function(d){return d.cur;});
+    var prevData=comp.data.map(function(d){return d.prev;});
+    
+    charts[elId]=new Chart(c.getContext('2d'),{
+      type:'bar',
+      data:{
+        labels:labels,
+        datasets:[
+          {label:prevMl,data:prevData,backgroundColor:'#9ca3af',borderRadius:4},
+          {label:ml,data:curData,backgroundColor:comp.color,borderRadius:4}
+        ]
+      },
+      options:{
+        responsive:true,
+        maintainAspectRatio:true,
+        plugins:{
+          legend:{labels:{color:'#555',font:{size:9,family:'Inter'}}}
+        },
+        scales:{
+          x:{ticks:{color:tickC,font:{size:9,family:'Inter'}},grid:{color:gridC}},
+          y:{ticks:{color:tickC,font:{size:9,family:'Inter'}},grid:{color:gridC}}
+        }
+      }
+    });
+  });
+}
+
+function buildComparisonData(name,curArr,prevArr,color){
+  var id=name.toLowerCase().replace(/[^a-z]/g,'');
+  var playerMap={};
+  
+  // Collect all players from both months
+  (curArr||[]).forEach(function(d){playerMap[d.p]={player:d.p,cur:d.v,prev:null};});
+  (prevArr||[]).forEach(function(d){
+    if(playerMap[d.p]){
+      playerMap[d.p].prev=d.v;
+    } else {
+      playerMap[d.p]={player:d.p,cur:null,prev:d.v};
+    }
+  });
+  
+  // Convert to array and sort by current value desc
+  var data=Object.keys(playerMap).map(function(k){return playerMap[k];}).sort(function(a,b){
+    var aVal=a.cur!==null?a.cur:0;
+    var bVal=b.cur!==null?b.cur:0;
+    return bVal-aVal;
+  });
+  
+  return {name:name,id:id,color:color,data:data};
+}
 </script>
 </body>
 </html>

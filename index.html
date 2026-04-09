@@ -14,10 +14,10 @@ h1,h2,h3,h4{font-family:'Poppins',sans-serif;font-weight:600}
 /* HEADER */
 .header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.9);backdrop-filter:blur(12px);padding:12px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #e5e7eb}
 .brand{display:flex;align-items:center;gap:10px}
-.brand-logo{width:42px;height:36px;border-radius:7px;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.brand-logo{width:140px;height:42px;border-radius:6px;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#fff;padding:4px 8px}
 .brand-logo img{width:100%;height:100%;object-fit:contain}
-.brand h1{font-size:1.1rem;color:#1e3a8a}
-.brand h1 span{color:#d97706}
+.brand h1{font-size:1.1rem;color:#000}
+.brand h1 span{color:#000}
 .month-pills{display:flex;gap:4px}
 .m-pill{padding:5px 14px;border-radius:20px;font-size:.76rem;font-weight:500;border:1.5px solid #e5e7eb;background:#fff;cursor:pointer;transition:all .2s;color:#6b7280}
 .m-pill:hover{border-color:#d97706;color:#d97706}
@@ -99,7 +99,7 @@ table.rk tr:hover{background:#f0f4ff}
 
 <div class="header">
   <div class="brand">
-    <div class="brand-logo"><img src="Logo ORPEC_Andaimes, Formas e Escoramentos-01.png" alt="ORPEC"></div>
+    <div class="brand-logo"><img src="Logo ORPEC_Andaimes, Formas e Escoramentos-02.png" alt="ORPEC"></div>
     <h1>Dashboard <span>Players</span></h1>
   </div>
   <div class="month-pills" id="monthPills">
@@ -134,7 +134,7 @@ table.rk tr:hover{background:#f0f4ff}
 
 <script>
 /* ===================== DATA ===================== */
-var COLORS_MUTE={'MILLS':'#9ca3af','PASHAL':'#9ca3af','ORGUEL':'#9ca3af','SH':'#9ca3af','ATEX':'#9ca3af','ORPEC':'#dc2626','PERI':'#9ca3af','MECAN':'#9ca3af','ROHR':'#9ca3af','ULMA':'#9ca3af'};
+var COLORS_MUTE={'MILLS':'#9ca3af','PASHAL':'#9ca3af','ORGUEL':'#9ca3af','SH':'#9ca3af','ATEX':'#9ca3af','ORPEC':'#dfab78','PERI':'#9ca3af','MECAN':'#9ca3af','ROHR':'#9ca3af','ULMA':'#9ca3af'};
 
 var MONTH_LABELS={Janeiro:'Jan',Fevereiro:'Fev','Mar\xE7o':'Mar'};
 
@@ -350,29 +350,29 @@ function render(){
     }
     charts[elId]=new Chart(c.getContext('2d'),{type:'bar',data:{labels:datasets.labels,datasets:datasets.items.map(function(d){return{label:d.label,data:d.data,backgroundColor:d.c,borderRadius:4};})},options:o});
   }
-  function cfn(p){ return p==='ORPEC'?'#dc2626':'#9ca3af'; }
+  function cfn(p){ return p==='ORPEC'?'#dfab78':'#9ca3af'; }
   function horizBar(elId,data,maxX){
     bar(elId,{labels:data.map(function(d){return d.p}),items:[{data:data.map(function(d){return d.v}),c:data.map(function(d){return cfn(d.p);})}]},true,true);
   }
-  function bestFirstSorted(arr){
-    // Filter out zero-value entries, sort desc by value (best first)
-    return arr.filter(function(d){return d.v>0;}).sort(function(a,b){return b.v-a.v;});
+  function allPlayersSorted(arr){
+    // Keep all players (including zero values), sort desc by value (best first)
+    return arr.slice().sort(function(a,b){return b.v-a.v;});
   }
 
-  // Instagram bar (current month only, non-zero, best first)
-  var igSorted=bestFirstSorted(mo.ig);
+  // Instagram bar (current month, all 6 players including zeros)
+  var igSorted=allPlayersSorted(mo.ig);
   bar('cIG',{labels:igSorted.map(function(d){return d.p}),items:[{data:igSorted.map(function(d){return d.v}),c:igSorted.map(function(d){return cfn(d.p)})}]},true,true);
 
-  // Facebook
-  var fbSorted=bestFirstSorted(mo.fb);
+  // Facebook (all 6 players including zeros)
+  var fbSorted=allPlayersSorted(mo.fb);
   bar('cFB',{labels:fbSorted.map(function(d){return d.p}),items:[{data:fbSorted.map(function(d){return d.v}),c:fbSorted.map(function(d){return cfn(d.p)})}]},true,true);
 
-  // LinkedIn
-  var liSorted=bestFirstSorted(mo.li);
+  // LinkedIn (all 6 players including zeros)
+  var liSorted=allPlayersSorted(mo.li);
   bar('cLI',{labels:liSorted.map(function(d){return d.p}),items:[{data:liSorted.map(function(d){return d.v}),c:liSorted.map(function(d){return cfn(d.p)})}]},true,true);
 
-  // YouTube (only non-zero, best first)
-  var ytData=bestFirstSorted(mo.yt);
+  // YouTube (all 6 players, including zero values)
+  var ytData=allPlayersSorted(mo.yt);
   if(ytData.length>0){
     bar('cYT',{labels:ytData.map(function(d){return d.p}),items:[{data:ytData.map(function(d){return d.v}),c:ytData.map(function(d){return cfn(d.p)})}]},true,true);
   } else {
@@ -380,19 +380,19 @@ function render(){
     if(charts['cYT']){charts['cYT'].destroy(); delete charts['cYT'];}
   }
 
-  // SEO
-  var seoSorted=bestFirstSorted(so.seo);
-  bar('cSEO',{labels:seoSorted.map(function(d){return d.p}),items:[{data:seoSorted.map(function(d){return d.v}),c:seoSorted.map(function(d){return cfn(d.p)})}]},true,true);
+  // SEO (all 6 players, including zero values)
+  var seoData=allPlayersSorted(so.seo);
+  bar('cSEO',{labels:seoData.map(function(d){return d.p}),items:[{data:seoData.map(function(d){return d.v}),c:seoData.map(function(d){return cfn(d.p)})}]},true,true);
 
-  // GMN
+  // GMN (all players including zeros)
   if(mo.gmn && mo.gmn.length > 0){
-    var gmnSorted=bestFirstSorted(mo.gmn);
+    var gmnSorted=allPlayersSorted(mo.gmn);
     bar('cGMN',{labels:gmnSorted.map(function(d){return d.p}),items:[{data:gmnSorted.map(function(d){return parseFloat(d.v.toFixed(1));}),c:gmnSorted.map(function(d){return cfn(d.p)})}]},true,true);
   }
 
-  // PageSpeed
-  var psSorted=bestFirstSorted(so.ps);
-  bar('cPS',{labels:psSorted.map(function(d){return d.p}),items:[{data:psSorted.map(function(d){return d.v}),c:psSorted.map(function(d){return cfn(d.p)})}]},true,true);
+  // PageSpeed (all 6 players, including zero values)
+  var psData=allPlayersSorted(so.ps);
+  bar('cPS',{labels:psData.map(function(d){return d.p}),items:[{data:psData.map(function(d){return d.v}),c:psData.map(function(d){return cfn(d.p)})}]},true,true);
 
   // Ranking table
   var rkItems=so.rt.slice().sort(function(a,b){return b.r-a.r;});
@@ -428,7 +428,7 @@ function render(){
     data:{
       labels:['SEO','PageSpeed','GMN','Instagram','Facebook','LinkedIn','YouTube'],
       datasets:radarTop5.map(function(p){
-        var clr=p.p==='ORPEC'?'#dc2626':'#9ca3af';
+        var clr=p.p==='ORPEC'?'#dfab78':'#9ca3af';
         return {
           label:p.p,
           backgroundColor:clr+(p.p==='ORPEC'?'22':'10'),
@@ -462,7 +462,7 @@ function render(){
     var h='<div class="dt-sec"><h4><span class="dot" style="background:'+dotColor+'"></span>'+title+'</h4><table class="dt"><thead><tr><th>Player</th><th>'+label2+'</th></tr></thead><tbody>';
     arr.forEach(function(d){
       var isOrpec=d.p==='ORPEC';
-      h+='<tr'+(isOrpec?' style="background:rgba(220,38,38,.05)"':'')+'><td'+(isOrpec?' style="color:#dc2626;font-weight:700"':'')+'>'+(isOrpec?'&#9733; ':'')+d.p+'</td><td'+(isOrpec?' style="color:#dc2626;font-weight:700"':'')+'>'+d.v.toLocaleString()+'</td></tr>';
+      h+='<tr'+(isOrpec?' style="background:rgba(223,171,120,.15)"':'')+'><td'+(isOrpec?' style="color:#dfab78;font-weight:700"':'')+'>'+(isOrpec?'&#9733; ':'')+d.p+'</td><td'+(isOrpec?' style="color:#dfab78;font-weight:700"':'')+'>'+d.v.toLocaleString()+'</td></tr>';
     });
     h+='</tbody></table></div>';
     return h;
@@ -473,7 +473,7 @@ function render(){
   tbl+=makeDt('YouTube - Performance','#ff0000',mo.yt,'Performance (%)');
   tbl+=makeDt('SEO (Woorank) - Score','#fbbf24',so.seo,'Score');
   if(mo.gmn && mo.gmn.length > 0) {
-    var gmnForTable = bestFirstSorted(mo.gmn);
+    var gmnForTable = allPlayersSorted(mo.gmn);
     tbl+=makeDt('Google Meu Neg&#243;cio - Score','#d97706',gmnForTable,'Score');
   }
   tbl+=makeDt('PageSpeed - Performance','#10b981',so.ps,'Score');

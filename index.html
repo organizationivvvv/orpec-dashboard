@@ -122,6 +122,7 @@ table.rk tr:hover{background:#f0f4ff}
 
 <div class="sec"><h3>Comparação de Performance</h3><p>Evolução em relação ao mês anterior por plataforma e geral</p></div>
 <div class="chart-grid" id="comparisonGrid"></div>
+<div class="chart-grid" id="comparisonGeneralGrid" style="margin-top:16px;"></div>
 
 <div class="sec"><h3>Rankings dos Players</h3><p>Classifica&#231;&#227;o geral por touchpoints e performance ponderada</p></div>
 <div class="chart-grid">
@@ -257,6 +258,8 @@ var SEO={
 /* ===================== HELPERS ===================== */
 var charts={};
 var curMo='Mar\xE7o';
+var gridC='rgba(0,0,0,0.05)';
+var tickC='#9ca3af';
 
 // Month order for comparison
 var MONTH_ORDER=['Janeiro','Fevereiro','Mar\xE7o'];
@@ -355,8 +358,6 @@ function render(){
     '<div class="cc"><h4><span class="dot" style="background:#10b981"></span>PageSpeed</h4><canvas id="cPS"></canvas></div>';
 
   // Chart defaults
-  var gridC='rgba(0,0,0,0.05)';
-  var tickC='#9ca3af';
   function bar(elId,datasets,idxAxis,horiz){
     var c=document.getElementById(elId);
     if(!c)return;
@@ -517,10 +518,12 @@ function renderComparison(){
   var prevSo=prevMoName?SEO[prevMoName]:null;
   
   var grid=document.getElementById('comparisonGrid');
+  var generalGrid=document.getElementById('comparisonGeneralGrid');
   
   // If no previous month, show message
   if(!prevMo){
     grid.innerHTML='<div class="cc full" style="text-align:center;padding:40px;color:#6b7280;"><p>Sem dados do mês anterior para comparação.</p></div>';
+    generalGrid.innerHTML='';
     return;
   }
   
@@ -552,6 +555,7 @@ function renderComparison(){
   
   if(validComparisons.length===0){
     grid.innerHTML='<div class="cc full" style="text-align:center;padding:40px;color:#6b7280;"><p>Sem dados para comparação neste período.</p></div>';
+    generalGrid.innerHTML='';
     return;
   }
   
@@ -562,9 +566,6 @@ function renderComparison(){
   grid.innerHTML=html;
   
   // Render charts
-  var gridC='rgba(0,0,0,0.05)';
-  var tickC='#9ca3af';
-  
   validComparisons.forEach(function(comp){
     var elId='cmp_'+comp.id;
     var c=document.getElementById(elId);
@@ -596,6 +597,154 @@ function renderComparison(){
         }
       }
     });
+  });
+  
+  // === RENDER GENERAL COMPARISON CHART ===
+  renderGeneralComparison(mo, prevMo, so, prevSo, ml, prevMl);
+}
+
+function renderGeneralComparison(mo, prevMo, so, prevSo, ml, prevMl){
+  var generalGrid=document.getElementById('comparisonGeneralGrid');
+  
+  // Aggregate totals per player across all platforms for current and previous month
+  var playerTotals={};
+  
+  // Helper to aggregate from META arrays (social media metrics)
+  function aggregateMeta(arr, totals, isCur){
+    (arr||[]).forEach(function(d){
+      if(!totals[d.p]) totals[d.p]={player:d.p,cur:0,prev:0};
+      if(isCur) totals[d.p].cur+=d.v; else totals[d.p].prev+=d.v;
+    });
+  }
+  
+  // Helper to aggregate from SEO arrays (seo scores, ps scores, gmn)
+  function aggregateSeo(arr, totals, isCur, key){
+    (arr||[]).forEach(function(d){
+      if(!totals[d.p]) totals[d.p]={player:d.p,cur:0,prev:0};
+      if(isCur) totals[d.p].cur+=d.v; else totals[d.p].prev+=d.v;
+    });
+  }
+  
+  // Aggregate current month
+  aggregateMeta(mo.ig, playerTotals, true);
+  aggregateMeta(mo.fb, playerTotals, true);
+  aggregateMeta(mo.li, playerTotals, true);
+  aggregateMeta(mo.yt, playerTotals, true);
+  if(mo.gmn) aggregateMeta(mo.gmn, playerTotals, true);
+  aggregateSeo(so.seo, playerTotals, true);
+  aggregateSeo(so.ps, playerTotals, true);
+  
+  // Aggregate previous month
+  aggregateMeta(prevMo.ig, playerTotals, false);
+  aggregateMeta(prevMo.fb, playerTotals, false);
+  aggregateMeta(prevMo.li, playerTotals, false);
+  aggregateMeta(prevMo.yt, playerTotals, false);
+  if(prevMo.gmn) aggregateMeta(prevMo.gmn, playerTotals, false);
+  aggregateSeo(prevSo.seo, playerTotals, false);
+  aggregateSeo(prevSo.ps, playerTotals, false);
+  
+  // Convert to array and filter players with data in at least one month
+  var data=Object.keys(playerTotals).map(function(k){return playerTotals[k];}).filter(function(d){return d.cur>0 || d.prev>0;});
+  
+  // Sort by current total desc
+  data.sort(function(a,b){return b.cur-a.cur;});
+  
+  if(data.length===0){
+    generalGrid.innerHTML='';
+    return;
+  }
+  
+  // Calculate variance percentage for each player
+  data.forEach(function(d){
+    if(d.prev>0){
+      d.varPct=((d.cur-d.prev)/d.prev*100).toFixed(1);
+    } else if(d.cur>0){
+      d.varPct='+100.0';
+    } else {
+      d.varPct='-100.0';
+    }
+  });
+  
+  // Create bar chart with variance overlay
+  var canvasId='cmp_general_total';
+  var html='<div class="cc full"><h4><span class="dot" style="background:#1e40af"></span>Performance Geral ('+prevMl+' vs '+ml+') - Todos os Players</h4><canvas id="'+canvasId+'"></canvas></div>';
+  generalGrid.innerHTML=html;
+  
+  var c=document.getElementById(canvasId);
+  if(!c) return;
+  if(charts[canvasId]) charts[canvasId].destroy();
+  
+  var labels=data.map(function(d){return d.player;});
+  var curData=data.map(function(d){return d.cur;});
+  var prevData=data.map(function(d){return d.prev;});
+  var varColors=data.map(function(d){
+    var v=parseFloat(d.varPct);
+    if(v>0) return '#10b981'; // green for growth
+    if(v<0) return '#ef4444'; // red for decline
+    return '#9ca3af'; // gray for no change
+  });
+  
+  charts[canvasId]=new Chart(c.getContext('2d'),{
+    type:'bar',
+    data:{
+      labels:labels,
+      datasets:[
+        {label:prevMl,data:prevData,backgroundColor:'#9ca3af',borderRadius:4,order:2},
+        {label:ml,data:curData,backgroundColor:'#1e40af',borderRadius:4,order:1},
+        {
+          label:'Variação %',
+          data:data.map(function(d){return parseFloat(d.varPct);}),
+          type:'line',
+          borderColor:'#d97706',
+          backgroundColor:'rgba(217,119,6,0.1)',
+          borderWidth:2,
+          pointBackgroundColor:varColors,
+          pointBorderColor:varColors,
+          pointRadius:5,
+          pointHoverRadius:7,
+          yAxisID:'y1',
+          order:0,
+          fill:false,
+          tension:0.3
+        }
+      ]
+    },
+    options:{
+      responsive:true,
+      maintainAspectRatio:true,
+      interaction:{mode:'index',intersect:false},
+      plugins:{
+        legend:{labels:{color:'#555',font:{size:9,family:'Inter'}}},
+        tooltip:{
+          callbacks:{
+            label:function(ctx){
+              var label=ctx.dataset.label||'';
+              var value=ctx.parsed.y||0;
+              if(label==='Variação %'){
+                return label+': '+value.toFixed(1)+'%';
+              }
+              return label+': '+value.toLocaleString();
+            }
+          }
+        }
+      },
+      scales:{
+        x:{ticks:{color:tickC,font:{size:9,family:'Inter'}},grid:{color:gridC}},
+        y:{
+          ticks:{color:tickC,font:{size:9,family:'Inter'}},
+          grid:{color:gridC},
+          title:{display:true,text:'Pontuação Total',color:tickC,font:{size:9,family:'Inter'}}
+        },
+        y1:{
+          type:'linear',
+          display:true,
+          position:'right',
+          ticks:{color:'#d97706',font:{size:9,family:'Inter'},callback:function(v){return v+'%';}},
+          grid:{drawOnChartArea:false,color:gridC},
+          title:{display:true,text:'Variação %',color:'#d97706',font:{size:9,family:'Inter'}}
+        }
+      }
+    }
   });
 }
 

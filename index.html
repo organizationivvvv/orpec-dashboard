@@ -748,6 +748,20 @@ function renderAllPlayersTrend() {
   var labels = months.map(function(m){return DATA.meta.monthLabels[m];});
   var datasets = [];
 
+  // Cores distintas para cada player no gráfico de tendência
+  var trendColors = {
+    'ORPEC': '#dfab78',
+    'ORGUEL': '#3b82f6',
+    'MILLS': '#10b981',
+    'PASHAL': '#f59e0b',
+    'SH': '#ef4444',
+    'ATEX': '#8b5cf6',
+    'PERI': '#06b6d4',
+    'MECAN': '#ec4899',
+    'ROHR': '#14b8a6',
+    'ULMA': '#f97316'
+  };
+
   // Para cada player visível que tem dados de performance em todos os meses
   var playersWithData = {};
   months.forEach(function(m) {
@@ -763,19 +777,20 @@ function renderAllPlayersTrend() {
     // Só adiciona se tem pelo menos 1 mês com dados
     if (dataPoints.some(function(v){return v!==null;})) {
       var isOrpec = player === 'ORPEC';
+      var color = trendColors[player] || getColor(player);
       datasets.push({
         label: player,
         data: dataPoints,
-        borderColor: getFullColor(player),
-        backgroundColor: getFullColor(player) + (isOrpec ? '15' : '08'),
-        borderWidth: isOrpec ? 3 : 1.8,
+        borderColor: color,
+        backgroundColor: color + (isOrpec ? '20' : '10'),
+        borderWidth: isOrpec ? 3.5 : 2.2,
         tension: 0.35,
         fill: false,
-        pointRadius: isOrpec ? 5 : 3,
-        pointBackgroundColor: getFullColor(player),
-        pointBorderColor: isOrpec ? '#fff' : 'transparent',
-        pointBorderWidth: isOrpec ? 2 : 0,
-        borderDash: isOrpec ? [] : [4, 3],
+        pointRadius: isOrpec ? 6 : 4,
+        pointBackgroundColor: color,
+        pointBorderColor: isOrpec ? '#fff' : color,
+        pointBorderWidth: isOrpec ? 2.5 : 1.5,
+        borderDash: isOrpec ? [] : [],
         spanGaps: true
       });
     }
@@ -910,6 +925,10 @@ loadData()
   });
 
 // Export button
+document.getElementById('btnExport').addEventListener('click', exportCSV);
+</script>
+</body>
+</html>
 document.getElementById('btnExport').addEventListener('click', exportCSV);
 </script>
 </body>

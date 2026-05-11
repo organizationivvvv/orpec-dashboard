@@ -13,7 +13,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://organizationivvvv.github.io/orpec-dashboard/">
   <meta property="og:title" content="Dashboard ORPEC Players 2026 — Performance Digital Multicanal">
-  <meta property="og:description" content="Acompanhe a performance digital de 10 players em Instagram, Facebook, LinkedIn, YouTube, SEO, PageSpeed e Google Meu Negócio. Dados de Jan a Mar 2026.">
+  <meta property="og:description" content="Acompanhe a performance digital de 10 players em Instagram, Facebook, LinkedIn, YouTube, SEO, PageSpeed e Google Meu Negócio. Dados de Jan a Abr 2026.">
   <meta property="og:image" content="https://organizationivvvv.github.io/orpec-dashboard/og-preview.png">
   <meta property="og:site_name" content="ORPEC Dashboard">
   <meta property="og:locale" content="pt_BR">
@@ -238,7 +238,7 @@ table.dt td:first-child{font-weight:600;color:var(--text)}
   <!-- HERO -->
   <section class="hero" aria-labelledby="hero-title">
     <h2 id="hero-title">Dashboard Completo</h2>
-    <p>Análise integrada de desempenho em redes sociais, SEO e métricas técnicas</p>
+    <p>Análise integrada de desempenho em redes sociais, SEO e métricas técnicas - Abril 2026</p>
   </section>
 
   <!-- KPIs -->
@@ -288,7 +288,7 @@ table.dt td:first-child{font-weight:600;color:var(--text)}
    =========================================================== */
 
 var charts = {};
-var curMo = 'Março';
+var curMo = 'Abril';
 var DATA = null;
 var visiblePlayers = {};
 
@@ -297,8 +297,8 @@ var DATA_INLINE = {
   "meta": {
     "title": "Dashboard ORPEC Players 2026",
     "description": "Análise integrada de desempenho em redes sociais, SEO e métricas técnicas",
-    "months": ["Janeiro", "Fevereiro", "Março"],
-    "monthLabels": {"Janeiro": "Jan", "Fevereiro": "Fev", "Março": "Mar"},
+    "months": ["Janeiro", "Fevereiro", "Março", "Abril"],
+    "monthLabels": {"Janeiro": "Jan", "Fevereiro": "Fev", "Março": "Mar", "Abril": "Abr"},
     "players": ["ORPEC", "ORGUEL", "MILLS", "PASHAL", "SH", "ATEX", "PERI", "MECAN", "ROHR", "ULMA"],
     "playerColors": {
       "MILLS": "#9ca3af", "PASHAL": "#9ca3af", "ORGUEL": "#9ca3af",
@@ -327,6 +327,13 @@ var DATA_INLINE = {
       "li": [{"p":"ORPEC","v":16.76},{"p":"ORGUEL","v":14.34},{"p":"ATEX","v":13.66},{"p":"PASHAL","v":3.88},{"p":"MILLS","v":1.47},{"p":"SH","v":0.79}],
       "yt": [{"p":"ATEX","v":2.09},{"p":"ORPEC","v":1.89},{"p":"MILLS","v":0},{"p":"SH","v":0},{"p":"ORGUEL","v":0},{"p":"PASHAL","v":0}],
       "gmn": [{"p":"SH","v":84.48},{"p":"PASHAL","v":55.2},{"p":"MILLS","v":52.44},{"p":"ORPEC","v":50.76},{"p":"ORGUEL","v":43.12}]
+    },
+    "Abril": {
+      "ig": [{"p":"MILLS","v":61077},{"p":"ORGUEL","v":9989},{"p":"SH","v":16023},{"p":"ATEX","v":25144},{"p":"PASHAL","v":3923},{"p":"ORPEC","v":2142}],
+      "fb": [{"p":"SH","v":129246},{"p":"MILLS","v":23081},{"p":"ATEX","v":13017},{"p":"ORGUEL","v":7400},{"p":"ORPEC","v":6789},{"p":"PASHAL","v":294}],
+      "li": [{"p":"ATEX","v":14432},{"p":"ORPEC","v":6203},{"p":"ORGUEL","v":62329},{"p":"PASHAL","v":13829},{"p":"MILLS","v":142964},{"p":"SH","v":55941}],
+      "yt": [{"p":"ORPEC","v":33},{"p":"SH","v":14200},{"p":"MILLS","v":76200},{"p":"ATEX","v":2375},{"p":"ORGUEL","v":120},{"p":"PASHAL","v":97}],
+      "gmn": [{"p":"ATEX","v":145.2},{"p":"PASHAL","v":55.2},{"p":"MILLS","v":52.44},{"p":"ORPEC","v":50.76},{"p":"ORGUEL","v":43.12},{"p":"SH","v":15.3}]
     }
   },
   "seo": {
@@ -400,6 +407,27 @@ var DATA_INLINE = {
         {"p":"PASHAL","s":25,"ps":15,"g":12,"ig":15,"fb":1,"li":12,"yt":2,"r":82}
       ],
       "overallPct": 68
+    },
+    "Abril": {
+      "seo": [{"p":"ORGUEL","v":79},{"p":"PASHAL","v":75},{"p":"MILLS","v":73},{"p":"ORPEC","v":71},{"p":"ATEX","v":65},{"p":"SH","v":0}],
+      "ps": [{"p":"SH","v":98.5},{"p":"ORGUEL","v":86.5},{"p":"ORPEC","v":80.5},{"p":"PASHAL","v":76},{"p":"MILLS","v":54.5},{"p":"ATEX","v":49}],
+      "touchpoints": [
+        {"p":"MILLS","s":4,"ps":2,"g":4,"ig":6,"fb":5,"li":2,"yt":4,"r":27},
+        {"p":"ORGUEL","s":6,"ps":5,"g":2,"ig":5,"fb":3,"li":4,"yt":2,"r":27},
+        {"p":"ORPEC","s":3,"ps":4,"g":3,"ig":1,"fb":2,"li":5,"yt":6,"r":24},
+        {"p":"SH","s":1,"ps":6,"g":1,"ig":4,"fb":6,"li":1,"yt":5,"r":24},
+        {"p":"ATEX","s":2,"ps":1,"g":6,"ig":3,"fb":4,"li":6,"yt":3,"r":25},
+        {"p":"PASHAL","s":5,"ps":3,"g":5,"ig":2,"fb":1,"li":3,"yt":1,"r":20}
+      ],
+      "performance": [
+        {"p":"MILLS","s":20,"ps":10,"g":12,"ig":18,"fb":5,"li":8,"yt":8,"r":81},
+        {"p":"ORGUEL","s":30,"ps":25,"g":6,"ig":15,"fb":3,"li":16,"yt":4,"r":99},
+        {"p":"ORPEC","s":15,"ps":20,"g":9,"ig":3,"fb":2,"li":20,"yt":12,"r":81},
+        {"p":"SH","s":5,"ps":30,"g":3,"ig":12,"fb":6,"li":4,"yt":10,"r":70},
+        {"p":"ATEX","s":10,"ps":5,"g":18,"ig":9,"fb":4,"li":24,"yt":6,"r":76},
+        {"p":"PASHAL","s":25,"ps":15,"g":15,"ig":6,"fb":1,"li":12,"yt":2,"r":76}
+      ],
+      "overallPct": 67
     }
   }
 };

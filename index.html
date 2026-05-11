@@ -1,512 +1,924 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard ORPEC - Players 2026</title>
-<script src="chart.min.js"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dashboard ORPEC Players 2026 — Análise integrada de desempenho em redes sociais, SEO e métricas técnicas para players do setor de andaimes, formas e escoramentos">
+  <meta name="theme-color" content="#1e3a8a">
+  <meta name="keywords" content="ORPEC, dashboard, marketing digital, SEO, redes sociais, andaimes, formas, escoramentos">
+  <meta name="author" content="ORPEC">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://organizationivvvv.github.io/orpec-dashboard/">
+  <meta property="og:title" content="Dashboard ORPEC Players 2026 — Performance Digital Multicanal">
+  <meta property="og:description" content="Acompanhe a performance digital de 10 players em Instagram, Facebook, LinkedIn, YouTube, SEO, PageSpeed e Google Meu Negócio. Dados de Jan a Abr 2026.">
+  <meta property="og:image" content="https://organizationivvvv.github.io/orpec-dashboard/og-preview.png">
+  <meta property="og:site_name" content="ORPEC Dashboard">
+  <meta property="og:locale" content="pt_BR">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://organizationivvvv.github.io/orpec-dashboard/">
+  <meta property="twitter:title" content="Dashboard ORPEC Players 2026 — Performance Digital">
+  <meta property="twitter:description" content="Acompanhe a performance digital de 10 players em redes sociais, SEO e métricas técnicas.">
+  <meta property="twitter:image" content="https://organizationivvvv.github.io/orpec-dashboard/og-preview.png">
+
+  <title>Dashboard ORPEC Players 2026 — Performance Digital Multicanal</title>
+
+  <link rel="icon" href="Logo ORPEC_Andaimes, Formas e Escoramentos-01.png" type="image/png">
+  <link rel="canonical" href="https://organizationivvvv.github.io/orpec-dashboard/">
+
+  <!-- Chart.js via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0e0e12;
-    --card: #15151c;
-    --border: rgba(255,255,255,0.06);
-    --text: #e4e4e8;
-    --muted: #6b6b78;
-    --accent: #6366f1;
-    --accent2: #818cf8;
-    --ig: #f43f5e;
-    --fb: #3b82f6;
-    --li: #0ea5e9;
-    --yt: #ef4444;
-    --seo: #10b981;
-    --speed: #a78bfa;
-    --gmn: #f59e0b;
-    --radius: 16px;
+/* ===================== CSS VARIABLES ===================== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --primary:#1e3a8a;--primary-dark:#1e40af;--primary-light:#2563eb;
+  --accent:#d97706;--accent-light:#f59e0b;
+  --bg-start:#eff6ff;--bg-mid:#f8fafc;--bg-end:#ffffff;
+  --text:#1f2937;--text-muted:#6b7280;--text-light:#9ca3af;
+  --border:#e5e7eb;--border-light:#f3f4f6;
+  --white:#ffffff;--card-bg:#ffffff;
+  --shadow:0 1px 3px rgba(0,0,0,.05);--shadow-hover:0 4px 14px rgba(0,0,0,.07);
+  --radius:10px;--radius-sm:7px;
+  --ig:#e1306c;--fb:#1877f2;--li:#0a66c2;--yt:#ff0000;
+  --seo:#fbbf24;--gmn:#d97706;--ps:#10b981;
+  --orpec:#dfab78;--muted:#9ca3af;
+  --success:#10b981;--danger:#dc2626;--info:#3b82f6;
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --text:#f9fafb;--text-muted:#d1d5db;--text-light:#9ca3af;
+    --border:#374151;--border-light:#1f2937;
+    --bg-start:#0f172a;--bg-mid:#1e293b;--bg-end:#0a0a0a;
+    --shadow:0 1px 3px rgba(0,0,0,.3);--shadow-hover:0 4px 14px rgba(0,0,0,.4);
+    --card-bg:#1e293b;--white:#1e293b;
   }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
+}
+html{font-family:'Inter',-apple-system,sans-serif;font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body{font-family:inherit;background:linear-gradient(180deg,var(--bg-start) 0%,var(--bg-mid) 40%,var(--bg-end) 100%);color:var(--text);min-height:100vh;transition:background .3s,color .3s}
+h1,h2,h3,h4{font-family:'Poppins',sans-serif;font-weight:600;line-height:1.3}
 
-  .bg-glow { position: fixed; top: -200px; left: 50%; transform: translateX(-50%); width: 800px; height: 500px; background: radial-gradient(ellipse, rgba(99,102,241,0.08) 0%, transparent 70%); pointer-events: none; z-index: 0; }
+/* ===================== LOADING / SKELETON ===================== */
+.loading-overlay{position:fixed;inset:0;z-index:9999;background:var(--bg-start);display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .5s,visibility .5s}
+.loading-overlay.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{margin-top:16px;color:var(--text-muted);font-size:.85rem}
 
-  /* Header */
-  .header { position: relative; z-index: 1; display: flex; justify-content: space-between; align-items: center; padding: 24px 40px; border-bottom: 1px solid var(--border); }
-  .header-left h1 { font-size: 1.35rem; font-weight: 600; letter-spacing: -0.02em; }
-  .header-left h1 span { color: var(--accent2); }
-  .header-left p { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
-  .header-right { display: flex; align-items: center; gap: 8px; }
-  .badge-live { background: rgba(16,185,129,0.15); color: #34d399; font-size: 0.68rem; font-weight: 600; padding: 4px 10px; border-radius: 20px; letter-spacing: 0.5px; text-transform: uppercase; }
+.skeleton{background:linear-gradient(90deg,var(--border) 25%,var(--border-light) 50%,var(--border) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:var(--radius)}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.skeleton-card{height:80px;border-radius:var(--radius);margin-bottom:8px}
+.skeleton-chart{height:350px;border-radius:var(--radius)}
 
-  /* Filters */
-  .filters { position: relative; z-index: 1; display: flex; gap: 16px; padding: 16px 40px; flex-wrap: wrap; }
-  .filter-group { display: flex; align-items: center; gap: 6px; }
-  .filter-group label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; font-weight: 500; }
-  select { background: var(--card); color: var(--text); border: 1px solid var(--border); padding: 6px 14px; border-radius: 8px; font-size: 0.82rem; font-family: inherit; cursor: pointer; transition: border-color 0.2s; }
-  select:hover, select:focus { border-color: var(--accent); outline: none; }
+/* ===================== ANIMATIONS ===================== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+.anim-fadeUp{animation:fadeUp .5s ease both}
+.anim-fadeIn{animation:fadeIn .5s ease both}
+.anim-scaleIn{animation:scaleIn .4s ease both}
+.anim-slideDown{animation:slideDown .3s ease both}
+.stagger-1{animation-delay:.05s}.stagger-2{animation-delay:.1s}.stagger-3{animation-delay:.15s}
+.stagger-4{animation-delay:.2s}.stagger-5{animation-delay:.25s}.stagger-6{animation-delay:.3s}
+.stagger-7{animation-delay:.35s}
 
-  /* Platform icons */
-  .platform-icon { width: 16px; height: 16px; display: inline-block; vertical-align: middle; flex-shrink: 0; }
-  .platform-icon svg { width: 16px; height: 16px; }
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+}
 
-  /* KPI */
-  .kpi-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; padding: 16px 40px; }
-  .kpi-card { background: var(--card); border-radius: var(--radius); padding: 18px 20px; border: 1px solid var(--border); position: relative; overflow: hidden; }
-  .kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); opacity: 0; transition: opacity 0.3s; }
-  .kpi-card:hover::before { opacity: 1; }
-  .kpi-card .icon { margin-bottom: 8px; }
-  .kpi-card .icon svg { width: 22px; height: 22px; }
-  .kpi-card .label { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 500; }
-  .kpi-card .value { font-size: 1.6rem; font-weight: 700; margin-top: 6px; letter-spacing: -0.02em; }
-  .kpi-card .sub { font-size: 0.68rem; color: var(--muted); margin-top: 2px; }
+/* ===================== HEADER ===================== */
+.header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);padding:12px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);transition:background .3s,border-color .3s}
+.brand{display:flex;align-items:center;gap:10px}
+.brand-logo{width:42px;height:36px;border-radius:var(--radius-sm);overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--white)}
+.brand-logo img{width:100%;height:100%;object-fit:contain;display:block}
+.brand h1{font-size:1.1rem;color:var(--text)}
+.brand h1 span{color:var(--text)}
+.header-right{display:flex;align-items:center;gap:8px}
+.month-pills{display:flex;gap:4px}
+.m-pill{padding:5px 14px;border-radius:20px;font-size:.76rem;font-weight:500;border:1.5px solid var(--border);background:var(--white);color:var(--text-muted);cursor:pointer;transition:all .2s;font-family:inherit}
+.m-pill:hover{border-color:var(--accent);color:var(--accent)}
+.m-pill:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.m-pill.active{background:var(--accent);border-color:var(--accent);color:var(--white)}
 
-  /* Dashboard grid */
-  .dashboard { padding: 8px 40px 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(520px, 1fr)); gap: 16px; }
-  .chart-card { background: var(--card); border-radius: var(--radius); padding: 24px; border: 1px solid var(--border); }
-  .chart-card h3 { font-size: 0.82rem; font-weight: 500; color: var(--muted); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-  .chart-card h3 .dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
-  .chart-card canvas { max-height: 340px; }
-  .chart-card.full { grid-column: 1 / -1; }
+/* ===================== HERO ===================== */
+.hero{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 40%,var(--primary-light) 100%);padding:50px 32px 46px;text-align:center;color:var(--white);position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;top:-60%;right:-20%;width:500px;height:500px;background:radial-gradient(circle,rgba(217,119,6,.12),transparent 70%)}
+.hero h2{font-size:1.7rem;font-weight:700;position:relative;z-index:1}
+.hero p{font-size:.88rem;color:rgba(255,255,255,.65);margin-top:4px;position:relative;z-index:1}
 
-  /* Table */
-  table.ranking { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
-  table.ranking th { color: var(--muted); text-transform: uppercase; font-size: 0.65rem; padding: 8px 10px; letter-spacing: 0.8px; font-weight: 500; border-bottom: 1px solid var(--border); text-align: center; }
-  table.ranking th:first-child, table.ranking td:first-child { text-align: left; }
-  table.ranking td { padding: 8px 10px; text-align: center; color: #999; }
-  table.ranking td:first-child { font-weight: 600; color: var(--text); }
-  table.ranking tr:not(:last-child) td { border-bottom: 1px solid rgba(255,255,255,0.03); }
-  table.ranking tbody tr { transition: background 0.15s; }
-  table.ranking tbody tr:hover { background: rgba(99,102,241,0.05); }
-  .rank-1 { color: #ffd700 !important; }
-  .rank-2 { color: #a0a0b0 !important; }
-  .rank-3 { color: #b87333 !important; }
+/* ===================== SECTIONS ===================== */
+.sec{padding:28px 32px 0}
+.sec h3{font-size:1.05rem;color:var(--text)}
+.sec p{font-size:.78rem;color:var(--text-muted);margin-top:2px}
 
-  /* Responsive */
-  @media (max-width: 700px) {
-    .header, .filters, .kpi-strip, .dashboard { padding-left: 16px; padding-right: 16px; }
-    .dashboard { grid-template-columns: 1fr; }
-  }
+/* ===================== KPI STRIP ===================== */
+.kpi-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:14px;padding:28px 32px 0}
+.kpi{background:var(--card-bg);border-radius:var(--radius);padding:18px 16px;box-shadow:var(--shadow);border:1px solid var(--border);border-left:4px solid var(--border);display:flex;align-items:flex-start;gap:12px;transition:box-shadow .2s,transform .2s;opacity:0;animation:fadeUp .4s ease both}
+.kpi:hover{box-shadow:var(--shadow-hover);transform:translateY(-2px)}
+.kpi.blue{border-left-color:var(--primary)}.kpi.amber{border-left-color:var(--accent)}.kpi.green{border-left-color:var(--ps)}.kpi.red{border-left-color:#dc2626}
+.kpi .ico{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.kpi .ico svg{width:20px;height:20px}
+.kpi .ico.bl{background:#eff6ff;color:var(--primary)}.kpi .ico.am{background:#fffbeb;color:var(--accent)}.kpi .ico.gr{background:#ecfdf5;color:var(--ps)}.kpi .ico.rd{background:#fef2f2;color:#dc2626}
+.kpi .bd{flex:1}
+.kpi .lb{font-size:.68rem;color:var(--text-muted);font-weight:500;text-transform:uppercase;letter-spacing:.5px}
+.kpi .vl{font-size:1.45rem;font-weight:700;color:var(--text);margin-top:2px}
+.kpi .sb{font-size:.66rem;color:var(--text-light);margin-top:2px}
+
+/* ===================== ORPEC POSITION CARDS ===================== */
+.orpec-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;padding:20px 32px 0}
+.op-card{border-radius:var(--radius);padding:16px;text-align:center;color:var(--white);position:relative;overflow:hidden;transition:transform .2s;opacity:0;animation:scaleIn .4s ease both}
+.op-card:hover{transform:scale(1.03)}
+.op-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.08),transparent)}
+.op-card .platform{font-size:.6rem;text-transform:uppercase;letter-spacing:.8px;opacity:.8;position:relative;z-index:1}
+.op-card .pos{font-size:1.8rem;font-weight:800;font-family:'Poppins';position:relative;z-index:1;line-height:1}
+.op-card .total{font-size:.62rem;opacity:.7;position:relative;z-index:1;margin-top:2px}
+
+/* ===================== CHART GRID ===================== */
+.chart-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(460px,1fr));gap:16px;padding:16px 32px 16px}
+.cc{background:var(--card-bg);border-radius:var(--radius);padding:18px 16px;box-shadow:var(--shadow);border:1px solid var(--border);transition:box-shadow .2s;opacity:0;animation:fadeUp .5s ease both}
+.cc:hover{box-shadow:var(--shadow-hover)}
+.cc h4{font-size:.8rem;font-weight:500;color:var(--text-muted);margin-bottom:8px;display:flex;align-items:center;gap:6px;justify-content:space-between}
+.cc .dot{width:8px;height:8px;border-radius:4px;flex-shrink:0}
+.cc canvas{max-height:330px}
+.cc.full{grid-column:1/-1}
+.chart-actions{display:flex;gap:4px}
+.btn-icon{width:28px;height:28px;border-radius:6px;border:1px solid var(--border);background:var(--white);color:var(--text-muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-size:.8rem}
+.btn-icon:hover{border-color:var(--accent);color:var(--accent);background:#fffbeb}
+
+/* ===================== RANKING TABLE ===================== */
+table.rk{width:100%;border-collapse:collapse;font-size:.78rem;background:var(--card-bg);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
+table.rk th{background:#f0f4ff;color:#4b5563;text-transform:uppercase;font-size:.63rem;padding:10px 8px;letter-spacing:.5px;font-weight:500;border-bottom:2px solid var(--border);text-align:center}
+table.rk th:first-child{text-align:left}
+table.rk td{padding:8px 8px;text-align:center;color:#4b5563;border-bottom:1px solid var(--border-light)}
+table.rk td:first-child{text-align:left;font-weight:600;color:var(--text)}
+table.rk tr:hover{background:#f0f4ff}
+.r1{color:var(--accent)!important}.r2{color:var(--text-light)!important}.r3{color:#b45309!important}
+.table-wrapper{overflow-x:auto;border-radius:var(--radius)}
+@media(prefers-color-scheme:dark){
+  table.rk th{background:#1e293b;color:var(--text-muted)}
+  table.rk tr:hover{background:#1e293b}
+  table.dt th{background:#1e293b}
+  .header{background:rgba(15,23,42,.92)}
+}
+
+/* ===================== DATA TABLES ===================== */
+.dt-sec{padding:0 32px 14px}
+.dt-sec h4{font-size:.88rem;font-weight:600;margin-bottom:6px;padding-bottom:5px;display:flex;align-items:center;gap:8px;border-bottom:2px solid var(--border-light);color:var(--text)}
+table.dt{width:100%;border-collapse:collapse;font-size:.78rem;background:var(--card-bg);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);margin-bottom:12px}
+table.dt th{background:var(--border-light);color:var(--text-muted);font-weight:500;font-size:.68rem;text-transform:uppercase;letter-spacing:.5px;padding:9px 14px;text-align:left;border-bottom:1px solid var(--border)}
+table.dt td{padding:8px 14px;border-bottom:1px solid var(--border-light);color:var(--text)}
+table.dt tr:last-child td{border-bottom:none}
+table.dt tr:hover{background:var(--border-light)}
+table.dt td:first-child{font-weight:600;color:var(--text)}
+
+/* ===================== FOOTER ===================== */
+.footer{background:#1e293b;color:#94a3b8;text-align:center;padding:22px 16px;font-size:.76rem;margin-top:12px}
+@media(prefers-color-scheme:dark){.footer{background:#0f172a;color:#64748b}}
+
+/* ===================== EXPORT BUTTON ===================== */
+.btn-export{padding:6px 14px;border-radius:8px;border:1.5px solid var(--accent);background:transparent;color:var(--accent);font-size:.72rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;display:inline-flex;align-items:center;gap:5px}
+.btn-export:hover{background:var(--accent);color:var(--white)}
+.btn-export svg{width:14px;height:14px}
+
+/* ===================== TOAST ===================== */
+.toast{position:fixed;bottom:24px;right:24px;background:#1e293b;color:#fff;padding:12px 20px;border-radius:10px;font-size:.8rem;z-index:9998;animation:fadeUp .3s ease;box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.toast.success{border-left:4px solid var(--success)}
+.toast.error{border-left:4px solid var(--danger)}
+
+/* ===================== RESPONSIVE ===================== */
+@media(max-width:700px){
+  .hero{padding:30px 16px 26px}
+  .header{padding:10px 16px;flex-wrap:wrap;gap:8px}
+  .chart-grid,.kpi-strip,.orpec-strip,.sec,.dt-sec{padding-left:16px;padding-right:16px}
+  .chart-grid{grid-template-columns:1fr}
+  .month-pills{display:none}
+  .kpi{flex-direction:column;text-align:center;gap:8px}
+  .filter-bar{padding:10px 16px}
+}
+
+/* ===================== ACCESSIBILITY ===================== */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.skip-link{position:absolute;top:-40px;left:0;background:var(--primary);color:var(--white);padding:8px;z-index:100;transition:top .3s}
+.skip-link:focus{top:0}
+*:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 </style>
 </head>
 <body>
-<div class="bg-glow"></div>
 
-<div class="header">
-  <div class="header-left">
-    <h1>Dashboard <span>ORPEC</span> Players 2026</h1>
-    <p>Performance digital multicanal &mdash; Jan a Mar 2026</p>
+<a href="#main" class="skip-link">Pular para o conteúdo</a>
+
+<!-- LOADING -->
+<div class="loading-overlay" id="loader">
+  <div class="spinner"></div>
+  <div class="loading-text">Carregando dashboard...</div>
+</div>
+
+<!-- HEADER -->
+<header class="header" role="banner">
+  <div class="brand">
+    <div class="brand-logo" aria-hidden="true"><img src="Logo ORPEC_Andaimes, Formas e Escoramentos-01.png" alt="ORPEC"></div>
+    <h1>Dashboard <span>Players</span></h1>
   </div>
   <div class="header-right">
-    <span class="badge-live">11 players</span>
+    <nav class="month-pills" aria-label="Seleção de mês" id="monthPills"></nav>
+    <button class="btn-export" id="btnExport" title="Exportar dados em CSV">
+      <svg viewBox="0 0 20 20" fill="none"><path d="M10 3v10m0 0l-3-3m3 3l3-3M4 15h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      CSV
+    </button>
   </div>
-</div>
+</header>
 
-<div class="filters">
-  <div class="filter-group">
-    <svg class="platform-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#888" stroke-width="1.2"/><text x="10" y="13.5" text-anchor="middle" fill="#888" font-size="7" font-weight="600">M</text></svg>
-    <label>M&#234;s:</label>
-    <select id="filterMonth" onchange="updateDashboard()">
-      <option value="all">Todos os meses</option>
-      <option value="2026-01">Janeiro 2026</option>
-      <option value="2026-02">Fevereiro 2026</option>
-      <option value="2026-03">Mar&#231;o 2026</option>
-    </select>
-  </div>
-</div>
+<main id="main">
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <h2 id="hero-title">Dashboard Completo</h2>
+    <p>Análise integrada de desempenho em redes sociais, SEO e métricas técnicas - Abril 2026</p>
+  </section>
 
-<div class="kpi-strip" id="kpiStrip"></div>
+  <!-- KPIs -->
+  <div class="kpi-strip" id="kpiStrip" role="region" aria-label="KPIs principais"></div>
+  <div id="trendCards" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;padding:16px 32px 0"></div>
+  <div id="orpecStrip" role="region" aria-label="Posição ORPEC por plataforma" style="margin-top:0"></div>
 
-<div class="dashboard">
-  <!-- Instagram -->
-  <div class="chart-card">
-    <h3><span class="dot" style="background:var(--ig)"></span>
-      <svg class="platform-icon" viewBox="0 0 20 20" fill="none" style="width:15px;height:15px"><rect x="3" y="3" width="14" height="14" rx="4" stroke="#f43f5e" stroke-width="1.3"/><circle cx="10" cy="10" r="3" stroke="#f43f5e" stroke-width="1.2"/><circle cx="14.5" cy="5.5" r="0.8" fill="#f43f5e"/></svg>
-      Instagram
-    </h3>
-    <canvas id="chartInstagram"></canvas>
-  </div>
-  <!-- LinkedIn -->
-  <div class="chart-card">
-    <h3><span class="dot" style="background:var(--li)"></span>
-      <svg class="platform-icon" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="14" height="14" rx="4" stroke="#0ea5e9" stroke-width="1.3"/><text x="10" y="13" text-anchor="middle" fill="#0ea5e9" font-size="8" font-weight="700">in</text></svg>
-      LinkedIn (%)
-    </h3>
-    <canvas id="chartLinkedin"></canvas>
-  </div>
-  <!-- YouTube -->
-  <div class="chart-card">
-    <h3><span class="dot" style="background:var(--yt)"></span>
-      <svg class="platform-icon" viewBox="0 0 20 20" fill="none"><rect x="1.5" y="5.5" width="17" height="9" rx="4" stroke="#ef4444" stroke-width="1.2"/><polygon points="9.5,7.5 9.5,12.5 13.5,10" fill="#ef4444"/></svg>
-      YouTube (%)
-    </h3>
-    <canvas id="chartYoutube"></canvas>
-  </div>
-  <!-- Facebook -->
-  <div class="chart-card">
-    <h3><span class="dot" style="background:var(--fb)"></span>
-      <svg class="platform-icon" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#3b82f6" stroke-width="1.3"/><text x="10" y="14" text-anchor="middle" fill="#3b82f6" font-size="9" font-weight="700">f</text></svg>
-      Facebook (seguidores)
-    </h3>
-    <canvas id="chartFacebook"></canvas>
+  <!-- PERFORMANCE CHARTS -->
+  <section class="sec"><h3 id="secTitle">Performance por Plataforma</h3><p>Comparativo entre players em cada rede social</p></section>
+  <div class="chart-grid" id="chartGrid" role="region" aria-label="Gráficos de performance"></div>
+
+  <!-- TREND CHART -->
+  <section class="sec"><h3>Evolução Temporal</h3><p>Tendência de performance de todos os players ao longo dos meses</p></section>
+  <div class="chart-grid">
+    <div class="cc full anim-fadeUp"><h4><span class="dot" style="background:#8b5cf6"></span>Evolução da Performance Ponderada por Player</h4>
+      <canvas id="allTrendChart"></canvas>
+    </div>
   </div>
 
-  <div class="chart-card full">
-    <h3><span class="dot" style="background:var(--accent)"></span>
-      Evolu&#231;&#227;o Mensal &mdash; Instagram
-    </h3>
-    <canvas id="chartTrend"></canvas>
+  <!-- RANKINGS -->
+  <section class="sec"><h3>Rankings dos Players</h3><p>Classificação geral por touchpoints e performance ponderada</p></section>
+  <div class="chart-grid">
+    <div class="cc full"><h4><span class="dot" style="background:#1e40af"></span>Touchpoints Digitais</h4><div id="rkTable" class="table-wrapper"></div></div>
+    <div class="cc"><h4><span class="dot" style="background:#1e40af"></span>Performance Ponderada por Canal</h4><canvas id="rkChart"></canvas></div>
+    <div class="cc"><h4><span class="dot" style="background:#8b5cf6"></span>Radar Multicanal (Top 5)</h4><canvas id="rkRadar"></canvas></div>
+    <div class="cc"><h4><span class="dot" style="background:#dfab78"></span>Evolução da Performance ORPEC</h4><canvas id="trendChart"></canvas></div>
   </div>
 
-  <!-- SEO -->
-  <div class="chart-card">
-    <h3><span class="dot" style="background:var(--seo)"></span>
-      <svg class="platform-icon" viewBox="0 0 20 20" fill="none"><circle cx="8" cy="8" r="5" stroke="#10b981" stroke-width="1.2"/><line x1="12" y1="12" x2="17" y2="17" stroke="#10b981" stroke-width="1.5" stroke-linecap="round"/></svg>
-      SEO Score (WooRank)
-    </h3>
-    <canvas id="chartSEO"></canvas>
-  </div>
-  <div class="chart-card">
-    <h3><span class="dot" style="background:var(--speed)"></span>
-      <svg class="platform-icon" viewBox="0 0 20 20" fill="none"><path d="M11 2L4 10h5l-1 8 7-8h-5l1-8z" stroke="#a78bfa" stroke-width="1.2" fill="none" stroke-linejoin="round"/></svg>
-      PageSpeed
-    </h3>
-    <canvas id="chartPageSpeed"></canvas>
-  </div>
+  <!-- DATA TABLES -->
+  <section class="sec"><h3>Dados Tabulados</h3><p>Todos os dados brutos por plataforma</p></section>
+  <div id="dataTables" role="region" aria-label="Tabelas de dados"></div>
+</main>
 
-  <div class="chart-card full">
-    <h3><span class="dot" style="background:var(--gmn)"></span>
-      Ranking Touchpoints Digitais
-    </h3>
-    <div id="rankingTable"></div>
-  </div>
-
-  <div class="chart-card full">
-    <h3><span class="dot" style="background:var(--accent2)"></span>
-      Performance Ponderada por Canal
-    </h3>
-    <canvas id="chartRankPerformance"></canvas>
-  </div>
-
-  <div class="chart-card">
-    <h3><span class="dot" style="background:var(--accent)"></span>
-      Pesos por Plataforma
-    </h3>
-    <canvas id="chartPercentual"></canvas>
-  </div>
-  <div class="chart-card">
-    <h3><span class="dot" style="background:var(--accent2)"></span>
-      Radar Multicanal
-    </h3>
-    <canvas id="chartRadar"></canvas>
-  </div>
-</div>
+<footer class="footer">&copy; 2026 ORPEC Players Dashboard</footer>
 
 <script>
-const COLORS = {
-  'MILLS':   '#e94560', 'PASHAL':  '#0ea5e9', 'ORGUEL':  '#a78bfa',
-  'SH':      '#34d399', 'ATEX':    '#f59e0b', 'ORPEC':   '#fb7185',
-  'PERI':    '#22d3ee', 'MECAN':   '#f97316', 'ROHR':    '#a3e635', 'ULMA': '#c084fc'
-};
+/* ===========================================================
+   DASHBOARD ORPEC v2 — Melhorias:
+   1. Dados em data.json externo (fetch) + fallback inline
+   2. Filtros de players (toggle)
+   3. Gráfico de evolução temporal (todos os players)
+   4. Botão exportar CSV
+   5. Animações de entrada
+   6. Meta tags OG/Twitter preenchidas
+   7. Loading skeleton + tratamento de erro
+   8. Toast notifications
+   =========================================================== */
 
-const MONTH_KEYS = [
-  {meta:'META-Jan.26',  gmn:'SEO_GMN-Jan.26',  label:'Jan'},
-  {meta:'META-Fev.26',  gmn:'SEO_GMN-Fev.26',  label:'Fev'},
-  {meta:'META-Mar.26',  gmn:'SEO_GMN-Mar.26',  label:'Mar'}
-];
+var charts = {};
+var curMo = 'Abril';
+var DATA = null;
+var visiblePlayers = {};
 
-const META_DATA = {
-  'META-Jan.26': {
-    instagram:  [{player:'ORGUEL',value:391},{player:'PERI',value:264},{player:'MILLS',value:248},{player:'MECAN',value:139},{player:'SH',value:81},{player:'PASHAL',value:39},{player:'ORPEC',value:33},{player:'ATEX',value:26},{player:'ROHR',value:21},{player:'ULMA',value:17}],
-    facebook:   [{player:'PERI',value:369000},{player:'SH',value:129000},{player:'MILLS',value:23000},{player:'ATEX',value:13000},{player:'ROHR',value:9900},{player:'ORGUEL',value:7400},{player:'ORPEC',value:6700},{player:'MECAN',value:1000},{player:'PASHAL',value:295},{player:'ULMA',value:27}],
-    linkedin:   [{player:'PERI',value:50},{player:'ORPEC',value:10.78},{player:'MILLS',value:10.22},{player:'ATEX',value:8.07},{player:'ROHR',value:7.04},{player:'PASHAL',value:6.72},{player:'ORGUEL',value:6.69},{player:'ULMA',value:5.88},{player:'MECAN',value:0.6},{player:'SH',value:0.57}],
-    youtube:    [{player:'ORPEC',value:11.49},{player:'ULMA',value:0.33},{player:'SH',value:0.07},{player:'PERI',value:0},{player:'ATEX',value:0},{player:'MILLS',value:0},{player:'ROHR',value:0},{player:'ORGUEL',value:0},{player:'PASHAL',value:0},{player:'MECAN',value:0}]
+/* ===================== DATA (inline fallback) ===================== */
+var DATA_INLINE = {
+  "meta": {
+    "title": "Dashboard ORPEC Players 2026",
+    "description": "Análise integrada de desempenho em redes sociais, SEO e métricas técnicas",
+    "months": ["Janeiro", "Fevereiro", "Março", "Abril"],
+    "monthLabels": {"Janeiro": "Jan", "Fevereiro": "Fev", "Março": "Mar", "Abril": "Abr"},
+    "players": ["ORPEC", "ORGUEL", "MILLS", "PASHAL", "SH", "ATEX", "PERI", "MECAN", "ROHR", "ULMA"],
+    "playerColors": {
+      "MILLS": "#9ca3af", "PASHAL": "#9ca3af", "ORGUEL": "#9ca3af",
+      "SH": "#9ca3af", "ATEX": "#9ca3af", "ORPEC": "#dfab78",
+      "PERI": "#9ca3af", "MECAN": "#9ca3af", "ROHR": "#9ca3af", "ULMA": "#9ca3af"
+    }
   },
-  'META-Fev.26': {
-    instagram:  [{player:'MILLS',value:205},{player:'ORGUEL',value:113},{player:'SH',value:75},{player:'PASHAL',value:42},{player:'ORPEC',value:26},{player:'ATEX',value:17}],
-    facebook:   [{player:'SH',value:129000},{player:'MILLS',value:23000},{player:'ATEX',value:13000},{player:'ORGUEL',value:7400},{player:'ORPEC',value:6700},{player:'PASHAL',value:293}],
-    linkedin:   [{player:'ATEX',value:15},{player:'PASHAL',value:10},{player:'ORPEC',value:6.21},{player:'ORGUEL',value:6.02},{player:'MILLS',value:3.21},{player:'SH',value:0.8}],
-    youtube:    [{player:'ORPEC',value:6.9},{player:'ATEX',value:2.83},{player:'SH',value:0.15},{player:'MILLS',value:0},{player:'ORGUEL',value:0},{player:'PASHAL',value:0}]
+  "social": {
+    "Janeiro": {
+      "ig": [{"p":"ORGUEL","v":391},{"p":"PERI","v":264},{"p":"MILLS","v":248},{"p":"MECAN","v":139},{"p":"SH","v":81},{"p":"PASHAL","v":39},{"p":"ORPEC","v":33},{"p":"ATEX","v":26},{"p":"ROHR","v":21},{"p":"ULMA","v":17}],
+      "fb": [{"p":"PERI","v":369000},{"p":"SH","v":129000},{"p":"MILLS","v":23000},{"p":"ATEX","v":13000},{"p":"ROHR","v":9900},{"p":"ORGUEL","v":7400},{"p":"ORPEC","v":6700},{"p":"MECAN","v":1000},{"p":"PASHAL","v":295},{"p":"ULMA","v":27}],
+      "li": [{"p":"PERI","v":50},{"p":"ORPEC","v":10.78},{"p":"MILLS","v":10.22},{"p":"ATEX","v":8.07},{"p":"ROHR","v":7.04},{"p":"PASHAL","v":6.72},{"p":"ORGUEL","v":6.69},{"p":"ULMA","v":5.88},{"p":"MECAN","v":0.6},{"p":"SH","v":0.57}],
+      "yt": [{"p":"ORPEC","v":11.49},{"p":"ULMA","v":0.33},{"p":"SH","v":0.07},{"p":"PERI","v":0},{"p":"ATEX","v":0},{"p":"MILLS","v":0},{"p":"ROHR","v":0},{"p":"ORGUEL","v":0},{"p":"PASHAL","v":0},{"p":"MECAN","v":0}],
+      "gmn": [{"p":"ULMA","v":106.64},{"p":"SH","v":82.72},{"p":"PASHAL","v":55.2},{"p":"MILLS","v":52.44},{"p":"ORPEC","v":50.76},{"p":"ORGUEL","v":42.24},{"p":"PERI","v":34.56},{"p":"ROHR","v":12.96},{"p":"MECAN","v":0}]
+    },
+    "Fevereiro": {
+      "ig": [{"p":"MILLS","v":205},{"p":"ORGUEL","v":113},{"p":"SH","v":75},{"p":"PASHAL","v":42},{"p":"ORPEC","v":26},{"p":"ATEX","v":17}],
+      "fb": [{"p":"SH","v":129000},{"p":"MILLS","v":23000},{"p":"ATEX","v":13000},{"p":"ORGUEL","v":7400},{"p":"ORPEC","v":6700},{"p":"PASHAL","v":293}],
+      "li": [{"p":"ATEX","v":15},{"p":"PASHAL","v":10},{"p":"ORPEC","v":6.21},{"p":"ORGUEL","v":6.02},{"p":"MILLS","v":3.21},{"p":"SH","v":0.8}],
+      "yt": [{"p":"ORPEC","v":6.9},{"p":"ATEX","v":2.83},{"p":"SH","v":0.15},{"p":"MILLS","v":0},{"p":"ORGUEL","v":0},{"p":"PASHAL","v":0}],
+      "gmn": [{"p":"SH","v":83.6},{"p":"PASHAL","v":55.2},{"p":"MILLS","v":52.44},{"p":"ORPEC","v":50.76},{"p":"ORGUEL","v":43.12}]
+    },
+    "Março": {
+      "ig": [{"p":"MILLS","v":141},{"p":"PASHAL","v":52},{"p":"ORGUEL","v":51},{"p":"SH","v":40},{"p":"ATEX","v":38},{"p":"ORPEC","v":26}],
+      "fb": [{"p":"SH","v":129431},{"p":"MILLS","v":23044},{"p":"ATEX","v":13135},{"p":"ORGUEL","v":7419},{"p":"ORPEC","v":6780},{"p":"PASHAL","v":293}],
+      "li": [{"p":"ORPEC","v":16.76},{"p":"ORGUEL","v":14.34},{"p":"ATEX","v":13.66},{"p":"PASHAL","v":3.88},{"p":"MILLS","v":1.47},{"p":"SH","v":0.79}],
+      "yt": [{"p":"ATEX","v":2.09},{"p":"ORPEC","v":1.89},{"p":"MILLS","v":0},{"p":"SH","v":0},{"p":"ORGUEL","v":0},{"p":"PASHAL","v":0}],
+      "gmn": [{"p":"SH","v":84.48},{"p":"PASHAL","v":55.2},{"p":"MILLS","v":52.44},{"p":"ORPEC","v":50.76},{"p":"ORGUEL","v":43.12}]
+    },
+    "Abril": {
+      "ig": [{"p":"MILLS","v":61077},{"p":"ORGUEL","v":9989},{"p":"SH","v":16023},{"p":"ATEX","v":25144},{"p":"PASHAL","v":3923},{"p":"ORPEC","v":2142}],
+      "fb": [{"p":"SH","v":129246},{"p":"MILLS","v":23081},{"p":"ATEX","v":13017},{"p":"ORGUEL","v":7400},{"p":"ORPEC","v":6789},{"p":"PASHAL","v":294}],
+      "li": [{"p":"ATEX","v":14432},{"p":"ORPEC","v":6203},{"p":"ORGUEL","v":62329},{"p":"PASHAL","v":13829},{"p":"MILLS","v":142964},{"p":"SH","v":55941}],
+      "yt": [{"p":"ORPEC","v":33},{"p":"SH","v":14200},{"p":"MILLS","v":76200},{"p":"ATEX","v":2375},{"p":"ORGUEL","v":120},{"p":"PASHAL","v":97}],
+      "gmn": [{"p":"ATEX","v":145.2},{"p":"PASHAL","v":55.2},{"p":"MILLS","v":52.44},{"p":"ORPEC","v":50.76},{"p":"ORGUEL","v":43.12},{"p":"SH","v":15.3}]
+    }
   },
-  'META-Mar.26': {
-    instagram:  [{player:'MILLS',value:141},{player:'PASHAL',value:52},{player:'ORGUEL',value:51},{player:'SH',value:40},{player:'ATEX',value:38},{player:'ORPEC',value:26}],
-    facebook:   [{player:'SH',value:129431},{player:'MILLS',value:23044},{player:'ATEX',value:13135},{player:'ORGUEL',value:7419},{player:'ORPEC',value:6780},{player:'PASHAL',value:293}],
-    linkedin:   [{player:'ORPEC',value:16.76},{player:'ORGUEL',value:14.34},{player:'ATEX',value:13.66},{player:'PASHAL',value:3.88},{player:'MILLS',value:1.47},{player:'SH',value:0.79}],
-    youtube:    [{player:'ATEX',value:2.09},{player:'ORPEC',value:1.89},{player:'MILLS',value:0},{player:'SH',value:0},{player:'ORGUEL',value:0},{player:'PASHAL',value:0}]
+  "seo": {
+    "Janeiro": {
+      "seo": [{"p":"ORGUEL","v":79},{"p":"MECAN","v":76},{"p":"PASHAL","v":75},{"p":"MILLS","v":73},{"p":"ORPEC","v":69},{"p":"PERI","v":67},{"p":"ROHR","v":66},{"p":"ATEX","v":63},{"p":"ULMA","v":63},{"p":"SH","v":0}],
+      "ps": [{"p":"MECAN","v":99.5},{"p":"SH","v":97.5},{"p":"ROHR","v":94},{"p":"ORGUEL","v":89.5},{"p":"ORPEC","v":80},{"p":"PASHAL","v":78},{"p":"PERI","v":70.5},{"p":"MILLS","v":68},{"p":"ATEX","v":52.5},{"p":"ULMA","v":33}],
+      "touchpoints": [
+        {"p":"PERI","s":5,"ps":3,"g":3,"ig":9,"fb":10,"li":10,"yt":7,"r":48},
+        {"p":"MILLS","s":7,"ps":3,"g":6,"ig":8,"fb":8,"li":8,"yt":5,"r":45},
+        {"p":"ORGUEL","s":10,"ps":7,"g":4,"ig":10,"fb":5,"li":4,"yt":5,"r":45},
+        {"p":"ORPEC","s":6,"ps":6,"g":5,"ig":4,"fb":4,"li":9,"yt":10,"r":44},
+        {"p":"SH","s":1,"ps":9,"g":8,"ig":6,"fb":9,"li":1,"yt":8,"r":42},
+        {"p":"ATEX","s":3,"ps":2,"g":10,"ig":3,"fb":7,"li":7,"yt":6,"r":38},
+        {"p":"PASHAL","s":8,"ps":5,"g":7,"ig":5,"fb":2,"li":5,"yt":2,"r":34},
+        {"p":"MECAN","s":9,"ps":10,"g":1,"ig":7,"fb":3,"li":2,"yt":1,"r":33},
+        {"p":"ROHR","s":4,"ps":8,"g":2,"ig":2,"fb":6,"li":6,"yt":4,"r":32},
+        {"p":"ULMA","s":2,"ps":1,"g":9,"ig":1,"fb":1,"li":3,"yt":9,"r":26}
+      ],
+      "performance": [
+        {"p":"ORGUEL","s":50,"ps":35,"g":12,"ig":30,"fb":5,"li":16,"yt":10,"r":158},
+        {"p":"ORPEC","s":30,"ps":30,"g":15,"ig":12,"fb":4,"li":36,"yt":20,"r":147},
+        {"p":"PERI","s":25,"ps":20,"g":9,"ig":27,"fb":10,"li":40,"yt":14,"r":145},
+        {"p":"MILLS","s":35,"ps":15,"g":18,"ig":24,"fb":8,"li":32,"yt":10,"r":142},
+        {"p":"MECAN","s":45,"ps":50,"g":3,"ig":21,"fb":3,"li":8,"yt":2,"r":132},
+        {"p":"PASHAL","s":40,"ps":25,"g":21,"ig":15,"fb":2,"li":20,"yt":4,"r":127},
+        {"p":"SH","s":5,"ps":45,"g":24,"ig":18,"fb":9,"li":4,"yt":16,"r":121},
+        {"p":"ATEX","s":15,"ps":10,"g":30,"ig":9,"fb":7,"li":28,"yt":12,"r":111},
+        {"p":"ROHR","s":20,"ps":40,"g":6,"ig":6,"fb":6,"li":24,"yt":8,"r":110},
+        {"p":"ULMA","s":10,"ps":5,"g":27,"ig":3,"fb":1,"li":12,"yt":18,"r":76}
+      ],
+      "overallPct": 77
+    },
+    "Fevereiro": {
+      "seo": [{"p":"ORGUEL","v":79},{"p":"PASHAL","v":75},{"p":"MILLS","v":73},{"p":"ORPEC","v":71},{"p":"ATEX","v":65},{"p":"SH","v":0}],
+      "ps": [{"p":"SH","v":97},{"p":"ORGUEL","v":86},{"p":"PASHAL","v":77.5},{"p":"MILLS","v":59},{"p":"ATEX","v":46.5},{"p":"ORPEC","v":43}],
+      "touchpoints": [
+        {"p":"MILLS","s":7,"ps":3,"g":6,"ig":8,"fb":8,"li":8,"yt":5,"r":45},
+        {"p":"ORGUEL","s":10,"ps":7,"g":4,"ig":10,"fb":5,"li":4,"yt":5,"r":45},
+        {"p":"ORPEC","s":6,"ps":6,"g":5,"ig":4,"fb":4,"li":9,"yt":10,"r":44},
+        {"p":"SH","s":1,"ps":9,"g":8,"ig":6,"fb":9,"li":1,"yt":8,"r":42},
+        {"p":"ATEX","s":3,"ps":2,"g":10,"ig":3,"fb":7,"li":7,"yt":6,"r":38},
+        {"p":"PASHAL","s":8,"ps":5,"g":7,"ig":5,"fb":2,"li":5,"yt":2,"r":34}
+      ],
+      "performance": [
+        {"p":"MILLS","s":35,"ps":15,"g":18,"ig":24,"fb":8,"li":32,"yt":10,"r":142},
+        {"p":"ORGUEL","s":50,"ps":35,"g":12,"ig":30,"fb":5,"li":16,"yt":10,"r":158},
+        {"p":"ORPEC","s":30,"ps":30,"g":15,"ig":12,"fb":4,"li":36,"yt":20,"r":147},
+        {"p":"SH","s":5,"ps":45,"g":24,"ig":18,"fb":9,"li":4,"yt":16,"r":121},
+        {"p":"ATEX","s":15,"ps":10,"g":30,"ig":9,"fb":7,"li":28,"yt":12,"r":111},
+        {"p":"PASHAL","s":40,"ps":25,"g":21,"ig":15,"fb":2,"li":20,"yt":4,"r":127}
+      ],
+      "overallPct": 67
+    },
+    "Março": {
+      "seo": [{"p":"ORGUEL","v":79},{"p":"PASHAL","v":75},{"p":"MILLS","v":73},{"p":"ORPEC","v":71},{"p":"ATEX","v":65},{"p":"SH","v":0}],
+      "ps": [{"p":"SH","v":98.5},{"p":"ORGUEL","v":86.5},{"p":"PASHAL","v":76},{"p":"ORPEC","v":80.5},{"p":"MILLS","v":54.5},{"p":"ATEX","v":49}],
+      "touchpoints": [
+        {"p":"MILLS","s":4,"ps":2,"g":3,"ig":6,"fb":5,"li":2,"yt":4,"r":26},
+        {"p":"ORGUEL","s":6,"ps":5,"g":1,"ig":4,"fb":3,"li":5,"yt":2,"r":26},
+        {"p":"SH","s":1,"ps":6,"g":5,"ig":3,"fb":6,"li":1,"yt":3,"r":25},
+        {"p":"ATEX","s":2,"ps":1,"g":6,"ig":2,"fb":4,"li":4,"yt":6,"r":25},
+        {"p":"ORPEC","s":3,"ps":4,"g":2,"ig":1,"fb":2,"li":6,"yt":5,"r":23},
+        {"p":"PASHAL","s":5,"ps":3,"g":4,"ig":5,"fb":1,"li":3,"yt":1,"r":22}
+      ],
+      "performance": [
+        {"p":"MILLS","s":20,"ps":10,"g":9,"ig":18,"fb":5,"li":8,"yt":8,"r":78},
+        {"p":"ORGUEL","s":30,"ps":25,"g":3,"ig":12,"fb":3,"li":20,"yt":4,"r":97},
+        {"p":"SH","s":5,"ps":30,"g":15,"ig":9,"fb":6,"li":4,"yt":6,"r":75},
+        {"p":"ATEX","s":10,"ps":5,"g":18,"ig":6,"fb":4,"li":16,"yt":12,"r":71},
+        {"p":"ORPEC","s":15,"ps":20,"g":6,"ig":3,"fb":2,"li":24,"yt":10,"r":80},
+        {"p":"PASHAL","s":25,"ps":15,"g":12,"ig":15,"fb":1,"li":12,"yt":2,"r":82}
+      ],
+      "overallPct": 68
+    },
+    "Abril": {
+      "seo": [{"p":"ORGUEL","v":79},{"p":"PASHAL","v":75},{"p":"MILLS","v":73},{"p":"ORPEC","v":71},{"p":"ATEX","v":65},{"p":"SH","v":0}],
+      "ps": [{"p":"SH","v":98.5},{"p":"ORGUEL","v":86.5},{"p":"ORPEC","v":80.5},{"p":"PASHAL","v":76},{"p":"MILLS","v":54.5},{"p":"ATEX","v":49}],
+      "touchpoints": [
+        {"p":"MILLS","s":4,"ps":2,"g":4,"ig":6,"fb":5,"li":2,"yt":4,"r":27},
+        {"p":"ORGUEL","s":6,"ps":5,"g":2,"ig":5,"fb":3,"li":4,"yt":2,"r":27},
+        {"p":"ORPEC","s":3,"ps":4,"g":3,"ig":1,"fb":2,"li":5,"yt":6,"r":24},
+        {"p":"SH","s":1,"ps":6,"g":1,"ig":4,"fb":6,"li":1,"yt":5,"r":24},
+        {"p":"ATEX","s":2,"ps":1,"g":6,"ig":3,"fb":4,"li":6,"yt":3,"r":25},
+        {"p":"PASHAL","s":5,"ps":3,"g":5,"ig":2,"fb":1,"li":3,"yt":1,"r":20}
+      ],
+      "performance": [
+        {"p":"MILLS","s":20,"ps":10,"g":12,"ig":18,"fb":5,"li":8,"yt":8,"r":81},
+        {"p":"ORGUEL","s":30,"ps":25,"g":6,"ig":15,"fb":3,"li":16,"yt":4,"r":99},
+        {"p":"ORPEC","s":15,"ps":20,"g":9,"ig":3,"fb":2,"li":20,"yt":12,"r":81},
+        {"p":"SH","s":5,"ps":30,"g":3,"ig":12,"fb":6,"li":4,"yt":10,"r":70},
+        {"p":"ATEX","s":10,"ps":5,"g":18,"ig":9,"fb":4,"li":24,"yt":6,"r":76},
+        {"p":"PASHAL","s":25,"ps":15,"g":15,"ig":6,"fb":1,"li":12,"yt":2,"r":76}
+      ],
+      "overallPct": 67
+    }
   }
 };
 
-const SEO_DATA = {
-  'SEO_GMN-Jan.26': {
-    seo:  [{player:'ORGUEL',value:79},{player:'MECAN',value:76},{player:'PASHAL',value:75},{player:'MILLS',value:73},{player:'ORPEC',value:69},{player:'PERI',value:67},{player:'ROHR',value:66},{player:'ATEX',value:63},{player:'ULMA',value:63},{player:'SH',value:0}],
-    pagespeed: [{player:'MECAN',value:99.5},{player:'SH',value:97.5},{player:'ROHR',value:94},{player:'ORGUEL',value:89.5},{player:'ORPEC',value:80},{player:'PASHAL',value:78},{player:'PERI',value:70.5},{player:'MILLS',value:68},{player:'ATEX',value:52.5},{player:'ULMA',value:33}],
-    rankingTouchpoints: [
-      {player:'PERI',seo:5,pagespeed:4,gmn:3,instagram:9,facebook:10,linkedin:10,youtube:7,resultado:48},
-      {player:'MILLS',seo:7,pagespeed:3,gmn:6,instagram:8,facebook:8,linkedin:8,youtube:5,resultado:45},
-      {player:'ORGUEL',seo:10,pagespeed:7,gmn:4,instagram:10,facebook:5,linkedin:4,youtube:5,resultado:45},
-      {player:'ORPEC',seo:6,pagespeed:6,gmn:5,instagram:4,facebook:4,linkedin:9,youtube:10,resultado:44},
-      {player:'SH',seo:1,pagespeed:9,gmn:8,instagram:6,facebook:9,linkedin:1,youtube:8,resultado:42},
-      {player:'ATEX',seo:3,pagespeed:2,gmn:10,instagram:3,facebook:7,linkedin:7,youtube:6,resultado:38},
-      {player:'PASHAL',seo:8,pagespeed:5,gmn:7,instagram:5,facebook:2,linkedin:5,youtube:2,resultado:34},
-      {player:'MECAN',seo:9,pagespeed:10,gmn:1,instagram:7,facebook:3,linkedin:2,youtube:1,resultado:33},
-      {player:'ROHR',seo:4,pagespeed:8,gmn:2,instagram:2,facebook:6,linkedin:6,youtube:4,resultado:32},
-      {player:'ULMA',seo:2,pagespeed:1,gmn:9,instagram:1,facebook:1,linkedin:3,youtube:9,resultado:26}
-    ],
-    rankingPerformance: [
-      {player:'ORGUEL',seo:50,pagespeed:35,gmn:12,instagram:30,facebook:5,linkedin:16,youtube:10,resultado:158},
-      {player:'ORPEC',seo:30,pagespeed:30,gmn:15,instagram:12,facebook:4,linkedin:36,youtube:20,resultado:147},
-      {player:'PERI',seo:25,pagespeed:20,gmn:9,instagram:27,facebook:10,linkedin:40,youtube:14,resultado:145},
-      {player:'MILLS',seo:35,pagespeed:15,gmn:18,instagram:24,facebook:8,linkedin:32,youtube:10,resultado:142},
-      {player:'MECAN',seo:45,pagespeed:50,gmn:3,instagram:21,facebook:3,linkedin:8,youtube:2,resultado:132},
-      {player:'PASHAL',seo:40,pagespeed:25,gmn:21,instagram:15,facebook:2,linkedin:20,youtube:4,resultado:127},
-      {player:'SH',seo:5,pagespeed:45,gmn:24,instagram:18,facebook:9,linkedin:4,youtube:16,resultado:121},
-      {player:'ATEX',seo:15,pagespeed:10,gmn:30,instagram:9,facebook:7,linkedin:28,youtube:12,resultado:111},
-      {player:'ROHR',seo:20,pagespeed:40,gmn:6,instagram:6,facebook:6,linkedin:24,youtube:8,resultado:110},
-      {player:'ULMA',seo:10,pagespeed:5,gmn:27,instagram:3,facebook:1,linkedin:12,youtube:18,resultado:76}
-    ],
-    percentual: [
-      {platform:'INSTAGRAM',peso:3,percentual:80},{platform:'FACEBOOK',peso:1,percentual:40},
-      {platform:'LINKEDIN',peso:4,percentual:80},{platform:'YOUTUBE',peso:2,percentual:100},
-      {platform:'SITE',peso:5,percentual:80},{platform:'GMN',peso:3,percentual:60}
-    ],
-    overallPct: 77
-  },
-  'SEO_GMN-Fev.26': {
-    seo:  [{player:'ORGUEL',value:79},{player:'PASHAL',value:75},{player:'MILLS',value:73},{player:'ORPEC',value:71},{player:'ATEX',value:65},{player:'SH',value:0}],
-    pagespeed: [{player:'SH',value:97},{player:'ORGUEL',value:86},{player:'PASHAL',value:77.5},{player:'MILLS',value:59},{player:'ATEX',value:46.5},{player:'ORPEC',value:43}],
-    rankingTouchpoints: [
-      {player:'MILLS',seo:7,pagespeed:3,gmn:6,instagram:8,facebook:8,linkedin:8,youtube:5,resultado:45},
-      {player:'ORGUEL',seo:10,pagespeed:7,gmn:4,instagram:10,facebook:5,linkedin:4,youtube:5,resultado:45},
-      {player:'ORPEC',seo:6,pagespeed:6,gmn:5,instagram:4,facebook:4,linkedin:9,youtube:10,resultado:44},
-      {player:'SH',seo:1,pagespeed:9,gmn:8,instagram:6,facebook:9,linkedin:1,youtube:8,resultado:42},
-      {player:'ATEX',seo:3,pagespeed:2,gmn:10,instagram:3,facebook:7,linkedin:7,youtube:6,resultado:38},
-      {player:'PASHAL',seo:8,pagespeed:5,gmn:7,instagram:5,facebook:2,linkedin:5,youtube:2,resultado:34}
-    ],
-    rankingPerformance: [
-      {player:'MILLS',seo:35,pagespeed:15,gmn:18,instagram:24,facebook:8,linkedin:32,youtube:10,resultado:142},
-      {player:'ORGUEL',seo:50,pagespeed:35,gmn:12,instagram:30,facebook:5,linkedin:16,youtube:10,resultado:158},
-      {player:'ORPEC',seo:30,pagespeed:30,gmn:15,instagram:12,facebook:4,linkedin:36,youtube:20,resultado:147},
-      {player:'SH',seo:5,pagespeed:45,gmn:24,instagram:18,facebook:9,linkedin:4,youtube:16,resultado:121},
-      {player:'ATEX',seo:15,pagespeed:10,gmn:30,instagram:9,facebook:7,linkedin:28,youtube:12,resultado:111},
-      {player:'PASHAL',seo:40,pagespeed:25,gmn:21,instagram:15,facebook:2,linkedin:20,youtube:4,resultado:127}
-    ],
-    percentual: [
-      {platform:'INSTAGRAM',peso:3,percentual:80},{platform:'FACEBOOK',peso:1,percentual:40},
-      {platform:'LINKEDIN',peso:4,percentual:60},{platform:'YOUTUBE',peso:2,percentual:100},
-      {platform:'SITE',peso:5,percentual:60},{platform:'GMN',peso:3,percentual:60}
-    ],
-    overallPct: 67
-  },
-  'SEO_GMN-Mar.26': {
-    seo:  [{player:'ORGUEL',value:79},{player:'PASHAL',value:75},{player:'MILLS',value:73},{player:'ORPEC',value:71},{player:'ATEX',value:65},{player:'SH',value:0}],
-    pagespeed: [{player:'SH',value:98.5},{player:'ORGUEL',value:86.5},{player:'PASHAL',value:76},{player:'ORPEC',value:80.5},{player:'MILLS',value:54.5},{player:'ATEX',value:49}],
-    rankingTouchpoints: [
-      {player:'MILLS',seo:4,pagespeed:2,gmn:3,instagram:6,facebook:5,linkedin:2,youtube:4,resultado:26},
-      {player:'ORGUEL',seo:6,pagespeed:5,gmn:1,instagram:4,facebook:3,linkedin:5,youtube:2,resultado:26},
-      {player:'SH',seo:1,pagespeed:6,gmn:5,instagram:3,facebook:6,linkedin:1,youtube:3,resultado:25},
-      {player:'ATEX',seo:2,pagespeed:1,gmn:6,instagram:2,facebook:4,linkedin:4,youtube:6,resultado:25},
-      {player:'ORPEC',seo:3,pagespeed:4,gmn:2,instagram:1,facebook:2,linkedin:6,youtube:5,resultado:23},
-      {player:'PASHAL',seo:5,pagespeed:3,gmn:4,instagram:5,facebook:1,linkedin:3,youtube:1,resultado:22}
-    ],
-    rankingPerformance: [
-      {player:'MILLS',seo:20,pagespeed:10,gmn:9,instagram:18,facebook:5,linkedin:8,youtube:8,resultado:78},
-      {player:'ORGUEL',seo:30,pagespeed:25,gmn:3,instagram:12,facebook:3,linkedin:20,youtube:4,resultado:97},
-      {player:'SH',seo:5,pagespeed:30,gmn:15,instagram:9,facebook:6,linkedin:4,youtube:6,resultado:75},
-      {player:'ATEX',seo:10,pagespeed:5,gmn:18,instagram:6,facebook:4,linkedin:16,youtube:12,resultado:71},
-      {player:'ORPEC',seo:15,pagespeed:20,gmn:6,instagram:3,facebook:2,linkedin:24,youtube:10,resultado:80},
-      {player:'PASHAL',seo:25,pagespeed:15,gmn:12,instagram:15,facebook:1,linkedin:12,youtube:2,resultado:82}
-    ],
-    percentual: [
-      {platform:'INSTAGRAM',peso:3,percentual:40},{platform:'FACEBOOK',peso:1,percentual:40},
-      {platform:'LINKEDIN',peso:4,percentual:80},{platform:'YOUTUBE',peso:2,percentual:80},
-      {platform:'SITE',peso:5,percentual:80},{platform:'GMN',peso:3,percentual:60}
-    ],
-    overallPct: 68
-  }
-};
+/* ===================== FETCH DATA ===================== */
+function loadData() {
+  // Tenta fetch (funciona via HTTP). Se falhar (file://), usa inline.
+  return fetch('data.json')
+    .then(function(r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function(d) {
+      DATA = d;
+      d.meta.players.forEach(function(p) { visiblePlayers[p] = true; });
+    })
+    .catch(function() {
+      // Fallback: dados inline (funciona via file://)
+      DATA = DATA_INLINE;
+      DATA_INLINE.meta.players.forEach(function(p) { visiblePlayers[p] = true; });
+    });
+}
 
-let charts = {};
-const gridColor = 'rgba(255,255,255,0.04)';
+/* ===================== HELPERS ===================== */
+function getMonthOrder() { return DATA.meta.months; }
+function getPrevMonth(m) { var o = getMonthOrder(); var i = o.indexOf(m); return i > 0 ? o[i-1] : null; }
+function getMeta(p) { return DATA.meta; }
+function getColor(p) { return DATA.meta.playerColors[p] || '#9ca3af'; }
+function getFullColor(p) { return p === 'ORPEC' ? '#dfab78' : getColor(p); }
 
-function getMonthFilter() {
-  const sel = document.getElementById('filterMonth').value;
-  if (sel === 'all') return MONTH_KEYS.slice();
-  return MONTH_KEYS.filter(function(m) {
-    if (sel === '2026-01') return m.label === 'Jan';
-    if (sel === '2026-02') return m.label === 'Fev';
-    if (sel === '2026-03') return m.label === 'Mar';
-    return true;
+function posRaw(arr) {
+  var filtered = arr.filter(function(d) { return visiblePlayers[d.p]; });
+  var sorted = [...filtered].sort(function(a,b){return b.v-a.v;});
+  var idx = sorted.findIndex(function(x){return x.p==='ORPEC';});
+  return {pos: idx+1, total: sorted.length, score: idx>=0?sorted[idx].v:'-'};
+}
+
+function findRankPerformanceIn(rtArr) {
+  var filtered = rtArr.filter(function(d){return visiblePlayers[d.p];});
+  var sorted = [...filtered].sort(function(a,b){return b.r-a.r;});
+  var idx = sorted.findIndex(function(x){return x.p==='ORPEC';});
+  return {pos: idx+1, total: sorted.length};
+}
+
+function getOverallDelta(m) {
+  var prev = getPrevMonth(m);
+  var curVal = DATA.seo[m].overallPct;
+  if (!prev) return {delta:0, cur:curVal, prev:curVal, noPrev:true};
+  return {delta: curVal - DATA.seo[prev].overallPct, cur:curVal, prev:DATA.seo[prev].overallPct, noPrev:false};
+}
+
+function getOrpecRankDelta(m) {
+  var prev = getPrevMonth(m);
+  var curRp = DATA.seo[m].performance;
+  var sortedCur = [...curRp].filter(function(d){return visiblePlayers[d.p];}).sort(function(a,b){return b.r-a.r;});
+  var posCur = sortedCur.findIndex(function(x){return x.p==='ORPEC';})+1;
+  if (!prev) return {cur:posCur, prev:posCur, delta:0, noPrev:true};
+  var prevRp = DATA.seo[prev].performance;
+  var sortedPrev = [...prevRp].filter(function(d){return visiblePlayers[d.p];}).sort(function(a,b){return b.r-a.r;});
+  var posPrev = sortedPrev.findIndex(function(x){return x.p==='ORPEC';})+1;
+  return {cur:posCur, prev:posPrev, delta:posPrev-posCur, noPrev:false};
+}
+
+function formatDelta(delta, isPos) {
+  if (delta===0) return {arrow:'→',sign:'',str:'0'+(isPos?' pos':'%'),color:'#6b7280'};
+  if (delta>0) return {arrow:'↑',sign:'+',str:delta+(isPos?' pos':'%'),color:'#10b981'};
+  return {arrow:'↓',sign:'',str:delta+(isPos?' pos':'%'),color:'#dc2626'};
+}
+
+function bestFirst(arr) { return arr.filter(function(d){return visiblePlayers[d.p];}).sort(function(a,b){return b.v-a.v;}); }
+
+/* ===================== MONTH PILLS ===================== */
+function renderMonthPills() {
+  var container = document.getElementById('monthPills');
+  var html = '';
+  getMonthOrder().forEach(function(m, i) {
+    var perf = DATA.seo[m].overallPct;
+    var active = m === curMo ? ' active' : '';
+    html += '<button class="m-pill'+active+'" data-month="'+m+'" onclick="selectMonth(this)"'+(active?' aria-current="page"':'')+' title="'+m+': Performance '+perf+'%">'+DATA.meta.monthLabels[m]+'</button>';
   });
+  container.innerHTML = html;
 }
 
-function destroyChart(id) {
-  if (charts[id]) { charts[id].destroy(); delete charts[id]; }
+function selectMonth(el) {
+  curMo = el.getAttribute('data-month');
+  document.querySelectorAll('.m-pill').forEach(function(b){b.classList.remove('active');b.removeAttribute('aria-current');});
+  el.classList.add('active');
+  el.setAttribute('aria-current','page');
+  render();
 }
 
-const baseScales = {
-  x: { ticks: { color: '#555', font: { size: 10, family: 'Inter' } }, grid: { color: gridColor } },
-  y: { ticks: { color: '#555', font: { size: 10, family: 'Inter' } }, grid: { color: gridColor } }
-};
+/* ===================== RENDER ===================== */
+function render() {
+  var mo = DATA.social[curMo];
+  var so = DATA.seo[curMo];
+  var ml = DATA.meta.monthLabels[curMo] || curMo;
 
-function createChart(canvasId, type, data, opts) {
-  var canvas = document.getElementById(canvasId);
-  if (!canvas) return;
-  destroyChart(canvasId);
-
-  var merged = { responsive: true, maintainAspectRatio: true };
-  merged.plugins = { legend: { labels: { color: '#777', font: { size: 10, family: 'Inter' }, boxWidth: 10, padding: 12 } } };
-  merged.scales = JSON.parse(JSON.stringify(baseScales));
-
-  if (opts && opts.horiz) {
-    merged.indexAxis = 'y';
-    merged.scales.x.grid = { color: gridColor };
-    merged.scales.x.max = opts.xMax;
-  }
-  if (type === 'line') {
-    data.datasets.forEach(function(ds) {
-      ds.borderColor = ds.backgroundColor;
-      ds.backgroundColor = 'transparent';
-      ds.borderWidth = 2;
-      ds.pointRadius = 4;
-      ds.pointHoverRadius = 6;
-      ds.tension = 0.3;
-    });
-  }
-  if (type === 'doughnut') {
-    merged.scales = {};
-    merged.cutout = '65%';
-  }
-  if (type === 'radar') {
-    merged.scales = { r: { grid: { color: gridColor }, angleLines: { color: 'rgba(255,255,255,0.06)' }, ticks: { color: '#555', backdropColor: 'transparent', font: { size: 9 } }, pointLabels: { color: '#888', font: { size: 10, family: 'Inter' } } } };
-    data.datasets.forEach(function(ds) {
-      ds.borderColor = ds.backgroundColor;
-      ds.borderWidth = 2;
-      ds.pointBackgroundColor = '#15151c';
-      ds.pointBorderColor = ds.borderColor;
-      ds.pointRadius = 3;
-    });
-  }
-  if (type === 'bar' && !opts) {
-    data.datasets.forEach(function(ds) {
-      ds.borderRadius = 4;
-    });
-  }
-
-  charts[canvasId] = new Chart(canvas.getContext('2d'), {
-    type: type, data: data, options: merged
-  });
-}
-
-function updateDashboard() {
-  var months = getMonthFilter();
-  if (months.length === 0) months = MONTH_KEYS.slice();
-  var last = months[months.length - 1];
-  var gmn = SEO_DATA[last.gmn];
-  var metaK = META_DATA[last.meta];
-
-  // KPI
-  var topIG = metaK.instagram.slice().sort(function(a,b){return b.value - a.value;})[0];
-  var topFB = metaK.facebook.slice().sort(function(a,b){return b.value - a.value;})[0];
-  var topRes = gmn.rankingPerformance && gmn.rankingPerformance.length ? gmn.rankingPerformance.slice().sort(function(a,b){return b.resultado - a.resultado;})[0] : null;
+  // -- KPIs --
+  var topIG = [...mo.ig].filter(function(d){return visiblePlayers[d.p];}).sort(function(a,b){return b.v-a.v;})[0];
+  var topLI = [...mo.li].filter(function(d){return visiblePlayers[d.p];}).sort(function(a,b){return b.v-a.v;})[0];
+  var topRP = [...so.performance].filter(function(d){return visiblePlayers[d.p];}).sort(function(a,b){return b.r-a.r;})[0];
 
   document.getElementById('kpiStrip').innerHTML =
-    '<div class="kpi-card"><div class="icon"><svg viewBox="0 0 22 22" fill="none"><rect x="2" y="2" width="18" height="18" rx="5" stroke="#f43f5e" stroke-width="1.4"/><circle cx="11" cy="11" r="3.5" stroke="#f43f5e" stroke-width="1.2"/><circle cx="16.5" cy="5.5" r="1" fill="#f43f5e"/></svg></div><div class="label">Top Instagram ' + last.label + '</div><div class="value" style="color:#f43f5e">' + (topIG ? topIG.player : '-') + '</div><div class="sub">' + (topIG ? topIG.value.toLocaleString() + ' perf.' : '') + '</div></div>' +
-    '<div class="kpi-card"><div class="icon"><svg viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="#3b82f6" stroke-width="1.3"/><text x="11" y="15" text-anchor="middle" fill="#3b82f6" font-size="8" font-weight="700">f</text></svg></div><div class="label">Top Facebook ' + last.label + '</div><div class="value" style="color:#3b82f6">' + (topFB ? topFB.player : '-') + '</div><div class="sub">' + (topFB ? (topFB.value/1000).toFixed(1) + 'K seg.' : '') + '</div></div>' +
-    '<div class="kpi-card"><div class="icon"><svg viewBox="0 0 22 22" fill="none"><path d="M7 3h8a3 3 0 013 3v10a3 3 0 01-3 3H7a3 3 0 01-3-3V6a3 3 0 013-3z" stroke="#a78bfa" stroke-width="1.2"/><polyline points="7,9 10,12 15,7" stroke="#a78bfa" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="label">Melhor Geral</div><div class="value" style="color:#a78bfa">' + (topRes ? topRes.player : '-') + '</div><div class="sub">' + (topRes ? topRes.resultado + ' pts' : '') + '</div></div>' +
-    '<div class="kpi-card"><div class="icon"><svg viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="#10b981" stroke-width="1.2"/><path d="M7.5 11.5L10 14l4.5-6" stroke="#10b981" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="label">% Performance</div><div class="value" style="color:#10b981">' + gmn.overallPct + '%</div><div class="sub">media ponderada</div></div>';
+    '<div class="kpi blue stagger-1"><div class="ico bl"><svg viewBox="0 0 22 22" fill="none"><rect x="2" y="2" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.4"/><circle cx="11" cy="11" r="3.5" stroke="currentColor" stroke-width="1.1"/><circle cx="16" cy="6" r="1" fill="currentColor"/></svg></div><div class="bd"><div class="lb">Top Instagram</div><div class="vl">'+(topIG?topIG.p:'—')+'</div><div class="sb">'+(topIG?topIG.v.toLocaleString()+' perf.':'Nenhum player visível')+'</div></div></div>'+
+    '<div class="kpi amber stagger-2"><div class="ico am"><svg viewBox="0 0 22 22" fill="none"><rect x="4" y="4" width="14" height="14" rx="3" stroke="currentColor" stroke-width="1.2"/><text x="11" y="14.5" text-anchor="middle" fill="currentColor" font-size="8" font-weight="700">in</text></svg></div><div class="bd"><div class="lb">Top LinkedIn</div><div class="vl">'+(topLI?topLI.p:'—')+'</div><div class="sb">'+(topLI?(topLI.v>1?topLI.v+' perf.':topLI.v.toFixed(4)+'%'):'')+'</div></div></div>'+
+    '<div class="kpi green stagger-3"><div class="ico gr"><svg viewBox="0 0 22 22" fill="none"><rect x="3" y="3" width="16" height="16" rx="3" stroke="currentColor" stroke-width="1.2"/><line x1="7" y1="13" x2="10" y2="16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><line x1="10" y1="16" x2="15" y2="9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></div><div class="bd"><div class="lb">Melhor Posição Geral</div><div class="vl">'+(topRP?topRP.p:'—')+'</div><div class="sb">'+(topRP?topRP.r+' pts':'')+'</div></div></div>'+
+    '<div class="kpi red stagger-4"><div class="ico rd"><svg viewBox="0 0 20 20" fill="none" width="20" height="20"><text x="10" y="14" text-anchor="middle" fill="currentColor" font-size="8" font-weight="700">%</text></svg></div><div class="bd"><div class="lb">% Performance Geral</div><div class="vl">'+so.overallPct+'%</div><div class="sb">média ponderada</div></div></div>';
 
-  // -- Instagram group bar --
-  var igLabels = months.map(function(m){return m.label;});
-  var igSeen = {};
-  var igItems = [];
-  months.forEach(function(m) { META_DATA[m.meta].instagram.slice(0,6).forEach(function(p){ if(!igSeen[p.player]){igSeen[p.player]=true; igItems.push({label:p.player,color:COLORS[p.player],data:[]});}}); });
-  months.forEach(function(m){igItems.forEach(function(it){var f=META_DATA[m.meta].instagram.find(function(x){return x.player===it.label;});it.data.push(f?f.value:0);});});
-  createChart('chartInstagram','bar',{labels:igLabels,datasets:igItems.map(function(d){return {label:d.label,data:d.data,backgroundColor:d.color};})});
+  // -- Trend cards --
+  var od = getOverallDelta(curMo);
+  var rd = getOrpecRankDelta(curMo);
+  var ofmt = formatDelta(od.delta, false);
+  var rfmt = formatDelta(rd.delta, true);
 
-  // -- LinkedIn group bar --
-  var liSeen = {};
-  var liItems = [];
-  months.forEach(function(m) { META_DATA[m.meta].linkedin.slice(0,6).forEach(function(p){ if(!liSeen[p.player]){liSeen[p.player]=true; liItems.push({label:p.player,color:COLORS[p.player],data:[]});}}); });
-  months.forEach(function(m){liItems.forEach(function(it){var f=META_DATA[m.meta].linkedin.find(function(x){return x.player===it.label;});it.data.push(f?f.value:0);});});
-  createChart('chartLinkedin','bar',{labels:igLabels,datasets:liItems.map(function(d){return {label:d.label,data:d.data,backgroundColor:d.color};})});
+  document.getElementById('trendCards').innerHTML =
+    '<div class="kpi green stagger-5"><div class="ico gr"><svg viewBox="0 0 22 22" fill="none"><path d="M11 6 L16 11 L11 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="bd"><div class="lb">'+(od.noPrev?'Performance (1º mês)':'Δ Performance Geral')+'</div><div class="vl" style="color:'+ofmt.color+'">'+ofmt.arrow+' '+so.overallPct+'%</div><div class="sb">'+(od.noPrev?'Sem mês anterior':(od.delta>=0?'subiu ':'desceu ')+Math.abs(od.delta)+'% vs '+(DATA.meta.monthLabels[getPrevMonth(curMo)]||getPrevMonth(curMo)))+'</div></div></div>'+
+    '<div class="kpi blue stagger-6"><div class="ico bl"><svg viewBox="0 0 22 22" fill="none"><path d="M11 6 L16 11 L11 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="bd"><div class="lb">'+(rd.noPrev?'Posição ORPEC (1º mês)':'Δ Posição ORPEC')+'</div><div class="vl" style="color:'+rfmt.color+'">'+rfmt.arrow+' '+rd.cur+'º</div><div class="sb">'+(rd.noPrev?'Sem mês anterior':(rd.delta>0?'subiu '+rd.delta+' pos':rd.delta<0?'desceu '+Math.abs(rd.delta)+' pos':'manteve'))+'</div></div></div>';
 
-  // -- YouTube --
-  var ytSeen = {};
-  var ytItems = [];
-  months.forEach(function(m) { META_DATA[m.meta].youtube.slice(0,6).forEach(function(p){ if(!ytSeen[p.player]){ytSeen[p.player]=true; ytItems.push({label:p.player,color:COLORS[p.player],data:[]});} }); });
-  if (ytItems.length > 0) {
-    months.forEach(function(m){ytItems.forEach(function(it){var f=META_DATA[m.meta].youtube.find(function(x){return x.player===it.label;});it.data.push(f?f.value:0);});});
-    createChart('chartYoutube','bar',{labels:igLabels,datasets:ytItems.map(function(d){return {label:d.label,data:d.data,backgroundColor:d.color};})});
+  // -- ORPEC position cards --
+  var prevMo = getPrevMonth(curMo);
+  var prevSOCIAL = prevMo ? DATA.social[prevMo] : mo;
+  var prevSEO = prevMo ? DATA.seo[prevMo] : so;
+
+  var igP = posRaw(mo.ig), fbP = posRaw(mo.fb), liP = posRaw(mo.li), ytP = posRaw(mo.yt), seP = posRaw(so.seo), psP = posRaw(so.ps), rpP = findRankPerformanceIn(so.touchpoints);
+  var pIgP = posRaw(prevSOCIAL.ig), pFbP = posRaw(prevSOCIAL.fb), pLiP = posRaw(prevSOCIAL.li), pYtP = posRaw(prevSOCIAL.yt), pSeP = posRaw(prevSEO.seo), pPsP = posRaw(prevSEO.ps), pRpP = findRankPerformanceIn(prevSEO.touchpoints);
+
+  var opColors = ['#e1306c','#1877f2','#0a66c2','#ff0000','#fbbf24','#10b981','#06b6d4'];
+  var opLabels = ['Instagram','Facebook','LinkedIn','YouTube','SEO','PageSpeed','GMN'];
+  var opData = [{c:igP,p:pIgP},{c:fbP,p:pFbP},{c:liP,p:pLiP},{c:ytP,p:pYtP},{c:seP,p:pSeP},{c:psP,p:pPsP},{c:rpP,p:pRpP}];
+
+  var opHtml = '<div class="orpec-strip">';
+  for (var i=0;i<opLabels.length;i++){
+    var d = opData[i];
+    var delta = d.p.pos - d.c.pos;
+    var arrow = delta>0?'↑':delta<0?'↓':'→';
+    var deltaStr = delta>0?'+'+delta:delta;
+    var color = delta>0?'#10b981':delta<0?'#dc2626':'#9ca3af';
+    opHtml+='<div class="op-card stagger-'+(i+1)+'" style="background:'+opColors[i]+'"><div class="platform">'+opLabels[i]+'</div><div class="pos">'+d.c.pos+'º <span style="font-size:.65em;color:'+color+'">'+arrow+(delta!==0?deltaStr:'')+'</span></div><div class="total">de '+d.c.total+' players</div></div>';
   }
+  opHtml+='</div>';
+  document.getElementById('orpecStrip').innerHTML = opHtml;
 
-  // -- Facebook horizontal bar --
-  var fbSorted = metaK.facebook.slice().sort(function(a,b){return a.value-b.value;});
-  createChart('chartFacebook','bar',{
-    labels: fbSorted.map(function(d){return d.player;}),
-    datasets:[{data:fbSorted.map(function(d){return d.value;}), backgroundColor:fbSorted.map(function(d){return COLORS[d.player];})}]
-  },{horiz:true, xMax:fbSorted[fbSorted.length-1].value*1.15});
+  // -- Chart Grid --
+  var grid = document.getElementById('chartGrid');
+  var platformDefs = [
+    {id:'cIG',label:'Instagram',color:'#e1306c',key:'ig'},
+    {id:'cFB',label:'Facebook',color:'#1877f2',key:'fb'},
+    {id:'cLI',label:'LinkedIn',color:'#0a66c2',key:'li'},
+    {id:'cYT',label:'YouTube',color:'#ff0000',key:'yt'},
+    {id:'cSEO',label:'SEO (Woorank)',color:'#fbbf24',key:'seo'},
+    {id:'cGMN',label:'Google Meu Negócio',color:'#d97706',key:'gmn'},
+    {id:'cPS',label:'PageSpeed',color:'#10b981',key:'ps'}
+  ];
 
-  // -- Trend line --
-  var igSeen2 = {};
-  MONTH_KEYS.forEach(function(m){META_DATA[m.meta].instagram.slice(0,5).forEach(function(p){igSeen2[p.player]=true;});});
-  var trendDS = Object.keys(igSeen2).slice(0,6).map(function(player){
-    return {label:player, data:MONTH_KEYS.map(function(m){var f=META_DATA[m.meta].instagram.find(function(x){return x.player===player;});return f?f.value:0;}), backgroundColor:COLORS[player]};
+  var gridHtml = '';
+  platformDefs.forEach(function(pd, i) {
+    gridHtml += '<div class="cc stagger-'+(i+1)+'"><h4><span class="dot" style="background:'+pd.color+'"></span>'+pd.label+
+      '<span class="chart-actions"><button class="btn-icon" onclick="exportChart(\''+pd.id+'\')" title="Baixar PNG">↓</button></span></h4>'+
+      '<canvas id="'+pd.id+'"></canvas></div>';
   });
-  createChart('chartTrend','line',{labels:['Jan','Fev','Mar'], datasets:trendDS});
+  grid.innerHTML = gridHtml;
 
-  // -- SEO --
-  var seoSorted = gmn.seo.slice().sort(function(a,b){return a.value-b.value;});
-  createChart('chartSEO','bar',{labels:seoSorted.map(function(d){return d.player;}), datasets:[{data:seoSorted.map(function(d){return d.value;}), backgroundColor:seoSorted.map(function(d){return COLORS[d.player];})}]},{horiz:true, xMax:100});
+  // -- Render bar charts --
+  var gridC = 'rgba(0,0,0,0.05)';
+  var tickC = '#9ca3af';
 
-  // -- PageSpeed --
-  var psSorted = gmn.pagespeed.slice().sort(function(a,b){return a.value-b.value;});
-  createChart('chartPageSpeed','bar',{labels:psSorted.map(function(d){return d.player;}), datasets:[{data:psSorted.map(function(d){return d.value;}), backgroundColor:psSorted.map(function(d){return COLORS[d.player];})}]},{horiz:true, xMax:105});
-
-  // -- Ranking Table --
-  if (gmn.rankingTouchpoints.length) {
-    var items = gmn.rankingTouchpoints.slice().sort(function(a,b){return b.resultado - a.resultado;});
-    var html = '<table class="ranking"><thead><tr><th>Player</th><th>SEO</th><th>PageSpeed</th><th>GMN</th><th>Instagram</th><th>Facebook</th><th>LinkedIn</th><th>YouTube</th><th>Resultado</th></tr></thead><tbody>';
-    items.forEach(function(item, i) {
-      var rc = i < 3 ? ' class="rank-' + (i+1) + '"' : '';
-      html += '<tr><td' + rc + '>' + (i+1) + '. ' + item.player + '</td><td>' + item.seo + '</td><td>' + item.pagespeed + '</td><td>' + item.gmn + '</td><td>' + item.instagram + '</td><td>' + item.facebook + '</td><td>' + item.linkedin + '</td><td>' + item.youtube + '</td><td><strong>' + item.resultado + '</strong></td></tr>';
-    });
-    html += '</tbody></table>';
-    document.getElementById('rankingTable').innerHTML = html;
-  }
-
-  // -- Ranking Performance stacked bar --
-  if (gmn.rankingPerformance.length) {
-    var perfItems = gmn.rankingPerformance.slice().sort(function(a,b){return b.resultado - a.resultado;});
-    var channels = [
-      {label:'SEO',key:'seo',color:'#10b981'},
-      {label:'PageSpeed',key:'pagespeed',color:'#a78bfa'},
-      {label:'GMN',key:'gmn',color:'#f59e0b'},
-      {label:'Instagram',key:'instagram',color:'#f43f5e'},
-      {label:'Facebook',key:'facebook',color:'#3b82f6'},
-      {label:'LinkedIn',key:'linkedin',color:'#0ea5e9'},
-      {label:'YouTube',key:'youtube',color:'#ef4444'}
-    ];
-    createChart('chartRankPerformance','bar',{
-      labels: perfItems.map(function(i){return i.player;}),
-      datasets: channels.map(function(ch){return {label:ch.label, data:perfItems.map(function(i){return i[ch.key];}), backgroundColor:ch.color};})
+  function bar(elId, labels, datasets, horiz) {
+    var c = document.getElementById(elId);
+    if (!c) return;
+    if (charts[elId]) charts[elId].destroy();
+    var opts = {
+      responsive:true, maintainAspectRatio:true,
+      animation:{duration:600,easing:'easeOutQuart'},
+      plugins:{legend:{display:false}},
+      scales:{}
+    };
+    if (horiz) {
+      opts.indexAxis='y';
+      opts.scales.x={ticks:{color:tickC,font:{size:9,family:'Inter'}},grid:{color:gridC}};
+      opts.scales.y={ticks:{color:tickC,font:{size:9,family:'Inter'}},grid:{color:gridC}};
+    } else {
+      opts.scales.x={ticks:{color:tickC,font:{size:9,family:'Inter'}},grid:{color:gridC}};
+      opts.scales.y={ticks:{color:tickC,font:{size:9,family:'Inter'}},grid:{color:gridC}};
+    }
+    charts[elId] = new Chart(c.getContext('2d'), {
+      type:'bar',
+      data:{
+        labels:labels,
+        datasets:datasets.map(function(d){return{label:d.label,data:d.data,backgroundColor:d.c,borderRadius:4};})
+      },
+      options:opts
     });
   }
 
-  // -- Percentual doughnut --
-  if (gmn.percentual.length) {
-    createChart('chartPercentual','doughnut',{
-      labels: gmn.percentual.map(function(p){return p.platform;}),
-      datasets: [{data:gmn.percentual.map(function(p){return p.percentual;}), backgroundColor:['#f43f5e','#3b82f6','#0ea5e9','#ef4444','#10b981','#f59e0b'], borderWidth:0}]
-    });
+  function renderBarChart(elId, dataArr) {
+    var sorted = bestFirst(dataArr);
+    if (sorted.length === 0) {
+      if (charts[elId]) { charts[elId].destroy(); delete charts[elId]; }
+      return;
+    }
+    bar(elId, sorted.map(function(d){return d.p;}), [{data:sorted.map(function(d){return d.v;}),c:sorted.map(function(d){return getFullColor(d.p);})}], true);
+  }
 
-    // -- Radar --
-    var radarP = gmn.rankingPerformance.slice(0, 4);
-    createChart('chartRadar','radar',{
-      labels: ['SEO','PageSpeed','GMN','Instagram','Facebook','LinkedIn','YouTube'],
-      datasets: radarP.map(function(p){return {label:p.player, backgroundColor:COLORS[p.player]+'40', data:[p.seo,p.pagespeed,p.gmn,p.instagram,p.facebook,p.linkedin,p.youtube]};})
+  renderBarChart('cIG', mo.ig);
+  renderBarChart('cFB', mo.fb);
+  renderBarChart('cLI', mo.li);
+  renderBarChart('cYT', mo.yt);
+
+  var seoData = bestFirst(so.seo);
+  if (seoData.length > 0) bar('cSEO', seoData.map(function(d){return d.p;}), [{data:seoData.map(function(d){return d.v;}),c:seoData.map(function(d){return getFullColor(d.p);})}], true);
+
+  if (mo.gmn && mo.gmn.length > 0) {
+    var gmnData = bestFirst(mo.gmn);
+    if (gmnData.length > 0) bar('cGMN', gmnData.map(function(d){return d.p;}), [{data:gmnData.map(function(d){return parseFloat(d.v.toFixed(1));}),c:gmnData.map(function(d){return getFullColor(d.p);})}], true);
+  }
+
+  var psData = bestFirst(so.ps);
+  if (psData.length > 0) bar('cPS', psData.map(function(d){return d.p;}), [{data:psData.map(function(d){return d.v;}),c:psData.map(function(d){return getFullColor(d.p);})}], true);
+
+  // -- Ranking table --
+  var rkItems = so.touchpoints.filter(function(d){return visiblePlayers[d.p];}).sort(function(a,b){return b.r-a.r;});
+  var rkHtml = '<table class="rk"><thead><tr><th>Player</th><th>SEO</th><th>Page Speed</th><th>GMN</th><th>IG</th><th>FB</th><th>LI</th><th>YT</th><th>Result.</th></tr></thead><tbody>';
+  rkItems.forEach(function(it, i) {
+    var rc = i<3?' class="r'+(i+1)+'"':'';
+    rkHtml += '<tr><td'+rc+'>'+(i+1)+'. '+it.p+'</td><td>'+it.s+'</td><td>'+it.ps+'</td><td>'+it.g+'</td><td>'+it.ig+'</td><td>'+it.fb+'</td><td>'+it.li+'</td><td>'+it.yt+'</td><td><strong>'+it.r+'</strong></td></tr>';
+  });
+  rkHtml += '</tbody></table>';
+  document.getElementById('rkTable').innerHTML = rkHtml;
+
+  // -- Stacked bar (Performance Ponderada) --
+  var rpMap = {};
+  so.performance.filter(function(d){return visiblePlayers[d.p];}).forEach(function(i){if(!rpMap[i.p])rpMap[i.p]=i;});
+  var rpItems = Object.keys(rpMap).map(function(k){return rpMap[k];}).sort(function(a,b){return b.r-a.r;});
+  var ch = [
+    {l:'SEO',k:'s',c:'#fbbf24'},{l:'PageSpeed',k:'ps',c:'#10b981'},{l:'GMN',k:'g',c:'#06b6d4'},
+    {l:'Instagram',k:'ig',c:'#e1306c'},{l:'Facebook',k:'fb',c:'#1877f2'},{l:'LinkedIn',k:'li',c:'#0a66c2'},{l:'YouTube',k:'yt',c:'#ff0000'}
+  ];
+  if (charts.rk) charts.rk.destroy();
+  if (rpItems.length > 0) {
+    charts.rk = new Chart(document.getElementById('rkChart').getContext('2d'), {
+      type:'bar',
+      data:{labels:rpItems.map(function(i){return i.p;}),datasets:ch.map(function(c){return{label:c.l,data:rpItems.map(function(i){return i[c.k];}),backgroundColor:c.c};})},
+      options:{responsive:true,maintainAspectRatio:true,animation:{duration:600},plugins:{legend:{labels:{color:'#555',font:{size:9,family:'Inter'},boxWidth:10,padding:10}}},scales:{x:{stacked:true,ticks:{color:tickC,font:{size:9,family:'Inter'}},grid:{color:gridC}},y:{stacked:true,ticks:{color:tickC,font:{size:9,family:'Inter'}},grid:{color:gridC}}}}
     });
   }
+
+  // -- All Players Trend Chart (NEW!) --
+  renderAllPlayersTrend();
+
+  // -- ORPEC trend line --
+  var months = getMonthOrder();
+  var trendData = months.map(function(m){return DATA.seo[m].overallPct;});
+  if (charts.trend) charts.trend.destroy();
+  charts.trend = new Chart(document.getElementById('trendChart').getContext('2d'), {
+    type:'line',
+    data:{
+      labels:months.map(function(m){return DATA.meta.monthLabels[m];}),
+      datasets:[{
+        label:'ORPEC Performance',data:trendData,borderColor:'#dfab78',backgroundColor:'rgba(223,171,120,0.10)',
+        borderWidth:2.5,fill:true,tension:0.35,pointRadius:4,pointHoverRadius:6,
+        pointBackgroundColor:'#dfab78',pointBorderColor:'#fff',pointBorderWidth:2
+      }]
+    },
+    options:{responsive:true,maintainAspectRatio:true,animation:{duration:600},plugins:{legend:{display:false},tooltip:{backgroundColor:'rgba(255,255,255,0.95)',titleColor:'#1f2937',bodyColor:'#1f2937',borderColor:'#e5e7eb',borderWidth:1,padding:10,titleFont:{family:'Inter',size:12,weight:'600'},bodyFont:{family:'Inter',size:11}}},scales:{x:{grid:{color:gridC},ticks:{color:tickC,font:{size:9,family:'Inter'}}},y:{min:0,max:100,grid:{color:gridC},ticks:{color:tickC,font:{size:9,family:'Inter'},callback:function(v){return v+'%';}}}}}
+  });
+
+  // -- Radar (Top 5) --
+  var radarTop5 = rpItems.slice(0,5);
+  if (charts.rkRadar) charts.rkRadar.destroy();
+  if (radarTop5.length > 0) {
+    charts.rkRadar = new Chart(document.getElementById('rkRadar').getContext('2d'), {
+      type:'radar',
+      data:{
+        labels:['SEO','PageSpeed','GMN','Instagram','Facebook','LinkedIn','YouTube'],
+        datasets:radarTop5.map(function(p){
+          var clr = getFullColor(p.p);
+          return {label:p.p,backgroundColor:clr+(p.p==='ORPEC'?'22':'10'),borderColor:clr,borderWidth:p.p==='ORPEC'?2.5:1.2,pointBackgroundColor:clr,pointRadius:p.p==='ORPEC'?4:2,data:[p.s,p.ps,p.g,p.ig,p.fb,p.li,p.yt]};
+        })
+      },
+      options:{responsive:true,maintainAspectRatio:true,animation:{duration:600},plugins:{legend:{labels:{color:'#555',font:{size:9,family:'Inter'},boxWidth:10,padding:10},position:'bottom'}},scales:{r:{beginAtZero:true,grid:{color:'rgba(0,0,0,0.06)'},angleLines:{color:'rgba(0,0,0,0.06)'},pointLabels:{color:'#555',font:{size:9,family:'Inter'}},ticks:{color:'#999',backdropColor:'transparent',font:{size:8},maxTicksLimit:5}}}}
+    });
+  }
+
+  // -- Data tables --
+  var tbl = '';
+  function makeDt(title, dotColor, arr, label2) {
+    var filtered = arr.filter(function(d){return visiblePlayers[d.p];});
+    if (filtered.length === 0) return '';
+    var sorted = [...filtered].sort(function(a,b){return b.v-a.v;});
+    var h = '<div class="dt-sec"><h4><span class="dot" style="background:'+dotColor+'"></span>'+title+'</h4><table class="dt"><thead><tr><th>Player</th><th>'+label2+'</th></tr></thead><tbody>';
+    sorted.forEach(function(d) {
+      var isOrpec = d.p==='ORPEC';
+      h += '<tr'+(isOrpec?' style="background:rgba(223,171,120,.08)"':'')+'><td'+(isOrpec?' style="color:#dfab78;font-weight:700"':'')+'>'+(isOrpec?'★ ':'')+d.p+'</td><td'+(isOrpec?' style="color:#dfab78;font-weight:700"':'')+'>'+d.v.toLocaleString()+'</td></tr>';
+    });
+    h += '</tbody></table></div>';
+    return h;
+  }
+  tbl += makeDt('Instagram','#e1306c',mo.ig,'Performance');
+  tbl += makeDt('Facebook','#1877f2',mo.fb,'Seguidores');
+  tbl += makeDt('LinkedIn','#0a66c2',mo.li,'Performance');
+  tbl += makeDt('YouTube','#ff0000',mo.yt,'Performance');
+  tbl += makeDt('SEO','#fbbf24',so.seo,'Score');
+  if (mo.gmn && mo.gmn.length>0) tbl += makeDt('Google Meu Negócio','#d97706',mo.gmn,'Score');
+  tbl += makeDt('PageSpeed','#10b981',so.ps,'Score');
+  document.getElementById('dataTables').innerHTML = tbl;
 }
 
-updateDashboard();
+/* ===================== ALL PLAYERS TREND (NEW!) ===================== */
+function renderAllPlayersTrend() {
+  if (charts.allTrend) charts.allTrend.destroy();
+  var months = getMonthOrder();
+  var labels = months.map(function(m){return DATA.meta.monthLabels[m];});
+  var datasets = [];
+
+  // Cores distintas para cada player no gráfico de tendência
+  var trendColors = {
+    'ORPEC': '#dfab78',
+    'ORGUEL': '#3b82f6',
+    'MILLS': '#10b981',
+    'PASHAL': '#f59e0b',
+    'SH': '#ef4444',
+    'ATEX': '#8b5cf6',
+    'PERI': '#06b6d4',
+    'MECAN': '#ec4899',
+    'ROHR': '#14b8a6',
+    'ULMA': '#f97316'
+  };
+
+  // Para cada player visível que tem dados de performance em todos os meses
+  var playersWithData = {};
+  months.forEach(function(m) {
+    DATA.seo[m].performance.forEach(function(p) {
+      if (!playersWithData[p.p]) playersWithData[p.p] = {};
+      playersWithData[p.p][m] = p.r;
+    });
+  });
+
+  Object.keys(playersWithData).forEach(function(player) {
+    if (!visiblePlayers[player]) return;
+    var dataPoints = months.map(function(m) { return playersWithData[player][m] !== undefined ? playersWithData[player][m] : null; });
+    // Só adiciona se tem pelo menos 1 mês com dados
+    if (dataPoints.some(function(v){return v!==null;})) {
+      var isOrpec = player === 'ORPEC';
+      var color = trendColors[player] || getColor(player);
+      datasets.push({
+        label: player,
+        data: dataPoints,
+        borderColor: color,
+        backgroundColor: color + (isOrpec ? '20' : '10'),
+        borderWidth: isOrpec ? 3.5 : 2.2,
+        tension: 0.35,
+        fill: false,
+        pointRadius: isOrpec ? 6 : 4,
+        pointBackgroundColor: color,
+        pointBorderColor: isOrpec ? '#fff' : color,
+        pointBorderWidth: isOrpec ? 2.5 : 1.5,
+        borderDash: isOrpec ? [] : [],
+        spanGaps: true
+      });
+    }
+  });
+
+  if (datasets.length === 0) return;
+
+  var gridC = 'rgba(0,0,0,0.05)';
+  var tickC = '#9ca3af';
+
+  charts.allTrend = new Chart(document.getElementById('allTrendChart').getContext('2d'), {
+    type: 'line',
+    data: { labels: labels, datasets: datasets },
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      animation: { duration: 800, easing: 'easeOutQuart' },
+      plugins: {
+        legend: {
+          labels: { color: '#555', font: { size: 10, family: 'Inter' }, boxWidth: 14, padding: 12, usePointStyle: true },
+          position: 'bottom'
+        },
+        tooltip: {
+          backgroundColor: 'rgba(255,255,255,0.95)',
+          titleColor: '#1f2937',
+          bodyColor: '#1f2937',
+          borderColor: '#e5e7eb',
+          borderWidth: 1,
+          padding: 12,
+          titleFont: { family: 'Inter', size: 12, weight: '600' },
+          bodyFont: { family: 'Inter', size: 11 }
+        }
+      },
+      scales: {
+        x: { grid: { color: gridC }, ticks: { color: tickC, font: { size: 9, family: 'Inter' } } },
+        y: { grid: { color: gridC }, ticks: { color: tickC, font: { size: 9, family: 'Inter' } } }
+      }
+    }
+  });
+}
+
+/* ===================== EXPORT CSV ===================== */
+function exportCSV() {
+  if (!DATA) return;
+  var months = getMonthOrder();
+  var lines = ['Mês,Plataforma,Player,Valor'];
+
+  months.forEach(function(m) {
+    var soc = DATA.social[m];
+    var seo = DATA.seo[m];
+    var platforms = [
+      {name:'Instagram',data:soc.ig},
+      {name:'Facebook',data:soc.fb},
+      {name:'LinkedIn',data:soc.li},
+      {name:'YouTube',data:soc.yt},
+      {name:'GMN',data:soc.gmn},
+      {name:'SEO',data:seo.seo},
+      {name:'PageSpeed',data:seo.ps}
+    ];
+    platforms.forEach(function(pl) {
+      (pl.data||[]).forEach(function(d) {
+        lines.push(m+','+pl.name+','+d.p+','+d.v);
+      });
+    });
+  });
+
+  // Performance data
+  months.forEach(function(m) {
+    (DATA.seo[m].performance||[]).forEach(function(p) {
+      lines.push(m+','+'Performance Ponderada,'+p.p+','+p.r);
+    });
+  });
+
+  var blob = new Blob(['\uFEFF'+lines.join('\n')], {type:'text/csv;charset=utf-8;'});
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = 'orpec-dashboard-dados.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('CSV exportado com sucesso!', 'success');
+}
+
+/* ===================== EXPORT CHART PNG ===================== */
+function exportChart(canvasId) {
+  var canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  // Temporarily remove max-height for full-res export
+  var origMaxHeight = canvas.style.maxHeight;
+  canvas.style.maxHeight = 'none';
+  
+  setTimeout(function() {
+    var link = document.createElement('a');
+    link.download = canvasId + '.png';
+    link.href = canvas.toDataURL('image/png', 1.0);
+    link.click();
+    canvas.style.maxHeight = origMaxHeight;
+    showToast('Gráfico exportado como PNG!', 'success');
+  }, 100);
+}
+
+/* ===================== TOAST ===================== */
+function showToast(msg, type) {
+  var existing = document.querySelector('.toast');
+  if (existing) existing.remove();
+  var el = document.createElement('div');
+  el.className = 'toast ' + (type || '');
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(function() { el.remove(); }, 3000);
+}
+
+/* ===================== INIT ===================== */
+loadData()
+  .then(function() {
+    renderMonthPills();
+    render();
+    // Hide loader
+    setTimeout(function() {
+      document.getElementById('loader').classList.add('hidden');
+    }, 300);
+  })
+  .catch(function(err) {
+    console.error('Erro ao carregar dados:', err);
+    document.getElementById('loader').innerHTML =
+      '<div style="text-align:center;color:#dc2626;padding:32px">'+
+      '<h3>⚠️ Erro ao carregar dados</h3>'+
+      '<p style="margin-top:8px;color:#6b7280">'+err.message+'</p>'+
+      '<p style="margin-top:16px;font-size:.8rem">Verifique se o arquivo <code>data.json</code> está no mesmo diretório.</p>'+
+      '</div>';
+  });
+
+// Export button
+document.getElementById('btnExport').addEventListener('click', exportCSV);
 </script>
 </body>
 </html>
